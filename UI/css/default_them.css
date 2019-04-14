@@ -1,0 +1,20 @@
+:root {
+  --rayal-white:white;
+  --rayal-right-white:#ECEFF1;
+  --rayal-white-sec:#f5f5f5;
+  --rayal-white-borders:#A3A3A3;
+  --rayal-gray-color:gray;
+  --rayol-primary-color:rgb(68, 156, 190);
+  --rayol-royal-yellow:rgb(200, 255, 1);
+  --rayol-dark-red-color:#9C3312;
+  --rayal-light-green-color:#01C83E;
+  --royal-light-blue: #92a7af;
+  --field-border-radius:0.04em;
+  --border-radius: 0.6em;
+  --rayol-on-horver-size:0.8em;
+  --secondary-white: #f4f4f4;
+  --border-links-width:3em;
+  --rayal-row-hover:#ECEFF1;
+  --rayal-near-white:#FAFAFA;
+
+}
