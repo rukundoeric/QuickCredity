@@ -58,9 +58,9 @@ h1{
     font-size: 20PX;
 }
 .icon-logo{
-	margin-top:7px;
-	width: 45px;
-	height:45px;
+	margin-top:2px;
+	width: 100px;
+	height:50px;
 	}
 .top-icon-div{
 	margin-left: 120px;
@@ -232,15 +232,19 @@ width: 100%;
   .footer-area .footer-single-widget .copywrite-text p {
       color: var(--rayal-white);
       margin-bottom: 0;
+      width: 900px;
+      margin-right: 100px;
    }
   .f-menu-list{
       margin: 10px;
       float: left;
+
   }
   .f-menu-header{
       text-decoration: none;
       color: var(--rayal-white);
       font-size: 15px;
+     
   }
   .footer_links_color{
      color: white;
@@ -408,7 +412,7 @@ input#img-4:checked ~ .nav-dots label#img-dot-4 {
     justify-content: center;
     align-items: center;
 }  
-p
+.p-desk
 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
