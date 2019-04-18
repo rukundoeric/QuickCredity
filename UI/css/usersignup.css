@@ -358,17 +358,17 @@ color: var( --rayol-primary-color);
   height: 30px;
   border: none;
   border-radius: 5px;
-
-
+  background-color: var(--rayol-primary-color);
+  color: #fff;
 }
 #btnRes:hover
 {
-  background: #df3939;
+  background: var(--rayol-primary-acent-color);
   transition: 1s;
 }
 #btnSub:hover
 {
-  background: #5a8ceb;
+  background: var(--rayol-primary-acent-color);;
   transition: 1s;
 }
 h3
