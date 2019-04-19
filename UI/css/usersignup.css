@@ -270,6 +270,19 @@ color: var( --rayol-primary-color);
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
+    background-image: url("../assets/images/loan-back.png")
+}
+.form-container
+{
+    height: 600px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    background-color: var(--rayal-white-sec);
+    opacity: 0.8;
 }
 
 .txts{
@@ -296,7 +309,7 @@ color: var( --rayol-primary-color);
   #signup-div
 {
  width: 550px;
- height: 450px;
+ height: 500px;
  border: 1px solid #c7c6c6;
  border-radius: 5px;
  background: #f1f1f1;
