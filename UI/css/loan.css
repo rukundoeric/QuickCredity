@@ -1,0 +1,144 @@
+/* Loan elements */
+@import url(default_them.css);
+.main-container
+{
+    height: 600px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+}
+
+.txts{
+    width: 185px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #dddddd;
+    margin-top: 5px
+  
+  }
+  .btns
+  {
+   width: 135px;
+   height: 30px;
+   border-radius: 5px;
+   outline: none;
+   border: 0px;
+   margin-left: 5px;
+   background-color: rgb(214, 211, 211);
+   color: #8f8e8e;
+  }
+
+  #signup-div
+{
+ width: 550px;
+ height: 350px;
+ border: 1px solid #c7c6c6;
+ border-radius: 5px;
+ background: #f1f1f1;
+}
+.head-signup
+{
+    
+    display: flex;
+    border-bottom: 1px solid #c7c6c6;
+    height: 80px;
+    background-color: var(--rayol-primary-color);
+    border-radius: 5px;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+.head-message
+{
+    width: 550px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: center;
+}
+.close-div
+{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height:20px;
+    border-radius: 50px;
+    background-color: var(--rayol-primary-acent-color);
+    color: var(--rayol-primary-color);
+}
+.close-div:hover{
+ cursor: pointer;
+ background-color: var( --rayol-primary-acent-hover-color);
+}
+.head-loan
+{
+ width: inherit;
+ margin-top: 3px;
+}
+.required
+{
+ font-family: Verdana, sans-serif;
+ font-size: 15px;
+ color: #757373;
+ margin-left: 25px
+
+}
+.required::after{
+  content: "*";
+  color: rgb(243, 55, 55);
+
+}
+.texts
+{
+  border: 1px solid #afafaf;
+  border-radius: 5px;
+  outline: #5ac9eb;
+  width: 500px;
+  height: 30px;
+  margin-left: 25px;
+  padding-left: 5px;
+}
+.row-signup-action
+{
+  width: inherit;
+  height: 47px;
+  border-top: 1px solid #afafaf;
+  margin-top: 10px;
+  padding-top: 10px
+}
+.buttons
+{
+  margin-left: 40px;
+  width: 210px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--rayol-primary-color);
+  color: #fff;
+}
+#btnRes:hover
+{
+  background: var(--rayol-primary-acent-color);
+  transition: 1s;
+}
+#btnSub:hover
+{
+  background: var(--rayol-primary-acent-color);;
+  transition: 1s;
+}
+h3
+{
+margin-top: 20px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: rgb(241, 241, 243);
+}
+.close-div
+{
+    float: right;
+}
