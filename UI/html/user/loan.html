@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../../css/loan.css">
+    </head>
+
+    <body>
+            <div class="main-container">
+                    <form action="post">
+                   <div id="signup-div" >
+                       <div class="head-signup">
+                           <div  class="head-message">
+                                <h3>Apply for loan</h3>
+                           </div>
+
+                           <div class="close-div" onclick="hideLoanForm()">
+                             X
+                           </div>
+                           
+                       </div>
+                       <div class="head-loan">
+                          <label class="required">Applicant's email</label> <br/>
+                          <input type="email" name="user-email" class="texts" />
+                       </div>
+                       <div class="head-loan">
+                           <label class="required">Amount</label> <br/>
+                           <input type="number" name="amount" class="texts" />
+                       </div>
+
+                       <div class="head-loan">
+                           <label class="required">Tenor</label> <br/>
+                           <input type="number" name="tenor" class="texts" />
+                       </div>
+                       <div class="head-loan">
+                            <label class="required">Created on</label> <br/>
+                            <input type="date" name="createdon" class="texts" />
+                        </div>
+                     
+
+
+                       <div class="row-signup-action">
+                         <input type="reset" name="reset" class="buttons" id="btnRes" value="Clear">
+                         <input type="submit" name="btnSubmit" class="buttons" id="btnSub" value="Submit application">   
+                       </div>
+                   </div> 
+               </form>
+                </div> 
+      <script type="text/javascript" src="../../js/loan.js">
+      </script>
+    </body>
+</html>
