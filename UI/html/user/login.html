@@ -42,7 +42,7 @@
         
             <div class="main-form-container">
                 <div class="form-container">
-                        <form>
+                        <form name="login_form">
                         <div class="login-contents">
                         <div class="login-header">
                             <p class="p-header">Login here</p>
@@ -52,7 +52,7 @@
                                 <table>
                                         <tr>
                                             <td> <label class="lbls">Login as</label></td>
-                                            <td> <select name="userRole" id="userRole" class="txts">
+                                            <td> <select name="userRoles" id="userRoles" class="txts">
                                                 <option >Select your role</option>
                                                 <option >Admin</option>
                                                 <option >Client</option>
@@ -76,7 +76,7 @@
                             <table class="actions">
                                 <tr>
                                     <td><input type="reset" id="btnReset" value="Reset" class="btns"></td>
-                                    <td><input type="submit" id="btnLogin" value="Login" class="btns" onclick="checkIfIsAdmin()"></td>
+                                    <td><input type="button" id="btnLogin" value="Login" class="btns" onclick="checkIfIsAdmin(document.forms['login_form'])"></td>
                                 </tr>
                             </table>
                         </div>
