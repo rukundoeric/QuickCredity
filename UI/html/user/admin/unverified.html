@@ -80,7 +80,7 @@
                 </div>
                 <div class="data-div">
                     <table border="0px" cellspacing="0" cellpadding="0">
-                       <tr class="row">
+                       <tr class="row" >
                           <th class="id-cell" align="center">Id</th>
                           <th class="data-head" align="center">First name</th>
                           <th class="data-head" align="center">Last name</th>
@@ -92,7 +92,7 @@
                           <th class="data-head" align="center">User role</th>
                           <th class="data-head" align="center">Action</th>
                        </tr>
-                       <tr class="row data-row">
+                       <tr class="row data-row" id="unverified11">
                            <td class="data-id" align="center"> 1</td>
                            <td class="data" align="center"> Urimubenshi </td>
                            <td class="data" align="center"> Daniel </td>
@@ -102,12 +102,11 @@
                            <td class="data" align="center"> 1234567890</td>
                            <td class="data" align="center" id="Status"> Unverified</td>
                            <td class="data" align="center"> Client</td>
-                           <td class="data" align="center"> <button id="btn-verify" class="btn-verify-class">Mark as verified</button>
-                            <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified" id="btn-ver">
+                           <td class="data" align="center"> <button id="btn-verify" class="btn-verify-class" onclick="reomoveFromUnverified()">Mark as verified</button>
                         </td>
                        </tr>
 
-                    <tr class="row data-row">
+                    <tr class="row data-row" id="unverified22">
                         <td class="data-id" align="center"> 3</td>
                         <td class="data" align="center"> Fifi </td>
                         <td class="data" align="center"> Solange </td>
@@ -117,12 +116,11 @@
                         <td class="data" align="center"> 1234567890</td>
                         <td class="data" align="center" id="Status2"> Unverified</td>
                         <td class="data" align="center"> Client</td>
-                        <td class="data" align="center"> <button id="btn-verify2" class="btn-verify-class">Mark as verified</button>
-                            <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified" id="btn-ver-2">
+                        <td class="data" align="center"> <button id="btn-verify2" class="btn-verify-class" onclick="reomoveFromUnverified()">Mark as verified</button>
                         </td>
                     </tr>
                   
-                 <tr class="row data-row">
+                 <tr class="row data-row" id="unverified33">
                     <td class="data-id" align="center"> 5</td>
                     <td class="data" align="center"> Musa </td>
                     <td class="data" align="center"> thierry </td>
@@ -132,11 +130,10 @@
                     <td class="data" align="center"> 4567890</td>
                     <td class="data" align="center" id="Status3"> Unverified</td>
                     <td class="data" align="center"> Admin</td>
-                    <td class="data" align="center"> <button id="btn-verify3" class="btn-verify-class">Mark as verified</button>
-                        <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified" id="btn-ver-3">
+                    <td class="data" align="center"> <button id="btn-verify3" class="btn-verify-class" onclick="reomoveFromUnverified()">Mark as verified</button>
                     </td>
                 </tr>
-             <tr class="row data-row">
+             <tr class="row data-row" id="unverified4">
                 <td class="data-id" align="center"> 7</td>
                 <td class="data" align="center"> John </td>
                 <td class="data" align="center"> Gakwaya </td>
@@ -146,8 +143,7 @@
                 <td class="data" align="center"> 1234567890</td>
                 <td class="data" align="center" id="Status4"> Unverified</td>
                 <td class="data" align="center"> Client</td>
-                <td class="data" align="center"> <button id="btn-verify4" class="btn-verify-class">Mark as verified</button>
-                    <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified" id="btn-ver-4">
+                <td class="data" align="center"> <button id="btn-verify44" class="btn-verify-class" onclick="reomoveFromUnverified()">Mark as verified</button>
                 </td>
             </tr>
 
@@ -162,7 +158,7 @@
             <footer class="footer-area">
                     <div class="col-y-content">
                         <div class="footer-single-widget">
-                            <a href="#"><img width="50px" height="50px" src="../../../assets/images/quick_logo.PNG" alt=""></a>
+                            <a href="dashboard.html"><img width="50px" height="50px" src="../../../assets/images/quick_logo.PNG" alt=""></a>
                             <div class="copywrite-text mt-30">
                                 <p>
                                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | QuickCredit</p>
@@ -236,6 +232,6 @@
                     </g>
                     </defs>
                     </svg> 
-                    <script type="text/javascript" src="../../../js/clients.js"></script>
+                    <script type="text/javascript" src="../../../js/unverified.js"></script>
     </body>
 </html>
