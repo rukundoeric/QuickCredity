@@ -10,3 +10,8 @@ for(var i=0;i<=btnsPay.length;i++)
       });
 }
 
+function pay()
+{
+    window.location.href = 'repayment.html'; 
+}
+

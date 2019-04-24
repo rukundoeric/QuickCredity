@@ -61,63 +61,41 @@
     </nav>
     <!-- End of Header definition -->
 
-    <!-- Body definition -->
-    <div class="main-container">
-        <div class="form-container">
-          <div class="content">
-            <div class="info-header">
-                <div class="info-div">
-                    <h3 id="h-info">Loan information</h3>
-                </div>
-                <div class="info-div">
-                    <div class="div-close">
-                     X
-                    </div>
+    <!-- Body -->
+    
+    <div class="main-container" id="main-container">
+        <div class="container">
+          <div class="contents">
+             <div class="content-head">
+                <h3>Loan information </h3>
+             </div>
+             <div class="content-body">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr class="row"><td class="data">Loan id:</td><td class="data">1</td></tr>
+ 
+                <tr class="row"><td class="data">User Email:</td><td class="data">benshidanny11@gmail.com</td></tr>
+                <tr class="row"><td class="data">Created on:</td><td class="data">2/2/2019</td></tr>
+                <tr class="row"><td class="data">Status:</td><td class="data">pending</td></tr>
+                <tr class="row"><td class="data">Repaid:</td><td class="data">false</td></tr>
+                <tr class="row"><td class="data">Tenor:</td><td class="data">200000</td></tr>
+                <tr class="row"><td class="data">Amount:</td><td class="data">10000 per month</td></tr>
+                <tr class="row"><td class="data">Installments:</td><td class="data">200000</td></tr>
+                <tr class="row"><td class="data">Balance:</td><td class="data">20000</td></tr>
+                <tr class="row"><td class="data">Interest:</td><td class="data">5 %</td></tr>
+              </table>
+             </div>
+             <div class="content-footer">
+                 <div class="inner-footer">
+                   <button class="btns" onclick="pay()">Pay this loan</button>
+
                  </div>
-            </div>
-            <div class="data-div">
-                <table border="0px" cellspacing="0" cellpadding="0">
-                   <tr class="row">
-                      <th class="id-cell">Id</th>
-                      <th class="data-head">Loan owner</th>
-                      <th class="data-head">Created on</th>
-                      <th class="data-head">Tenor</th>
-                      <th class="data-head">Last paid</th>
-                      <th class="data-head">Amount</th>
-                      <th class="data-head">Action</th>
-                   </tr>
-                   <tr class="row data-row">
-                       <td class="data-id" align="center"> 1</td>
-                       <td class="data" align="center"> Urimubenshi Daniel</td>
-                       <td class="data" align="center"> 20/04/2019</td>
-                       <td class="data" align="center"> 6 months</td>
-                       <td class="data" align="center"> 0</td>
-                       <td class="data" align="center"> 500000</td>
-                       <td class="data" align="center"> <button id="btn-pay-in-loan-info" class="btn-pay">Pay this loan</button></td>
-                   </tr>
-                   <tr class="row data-row">
-                        <td class="data-id" align="center"> 1</td>
-                        <td class="data" align="center"> Urimubenshi Daniel</td>
-                        <td class="data" align="center"> 20/04/2019</td>
-                        <td class="data" align="center"> 4 months</td>
-                        <td class="data" align="center"> 20000</td>
-                        <td class="data" align="center"> 480000</td>
-                        <td class="data" align="center"> <button id="btn-pay-in-loan-info" onclick="openPayForm()" class="btn-pay">Pay this loan</button></td>
-                    </tr>
-                    <tr class="row data-row">
-                        <td class="data-id" align="center"> 1</td>
-                        <td class="data" align="center"> Urimubenshi Daniel</td>
-                        <td class="data" align="center"> 20/04/2019</td>
-                        <td class="data" align="center"> 4 months</td>
-                        <td class="data" align="center"> 20000</td>
-                        <td class="data" align="center"> 460000</td>
-                        <td class="data" align="center"> <button id="btn-pay-in-loan-info" class="btn-pay">Pay this loan</button></td>
-                    </tr>
-                </table>
-            </div>
+ 
+             </div>
           </div>
         </div>
-    </div>
+     </div>
+ 
+     <!-- End of body -->
 
         <!-- Footer definition -->
         <footer class="footer-area">
