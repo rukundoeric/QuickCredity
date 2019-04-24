@@ -218,7 +218,9 @@ width: 100%;
 }
 .footer-icon.google
 {
-    fill: white;
+
+    fill:white;
+
 
 }
 .footer-icon.tumbr{
@@ -226,7 +228,6 @@ width: 100%;
 }
 .footer-icon.vk
 {
-
     fill: white;
 
 }
