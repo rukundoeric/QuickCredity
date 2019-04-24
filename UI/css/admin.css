@@ -295,25 +295,25 @@ iframe{
       fill-rule:nonzero;
   }
   .footer-icon.facebook{
-      fill:  var(--rayal-white);
+      fill:  white;
   }
   .footer-icon.instagram{
-      fill:  var(--rayol-orange-color);
+      fill:  white;
   }
   .footer-icon.twitter
   {
-      fill: var(--rayol-dark-red-color);
+      fill: white;
   }
   .footer-icon.google
   {
-      fill: var(--rayal-light-green-color);
+      fill: white;
   }
   .footer-icon.tumbr{
-     fill:  var(--rayal-white);
+     fill:  white;
   }
   .footer-icon.vk
   {
-      fill:  var(--rayol-orange-color);
+      fill: white;
   }
   
   .col-x-content{
