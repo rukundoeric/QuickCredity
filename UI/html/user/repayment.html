@@ -1,97 +1,104 @@
 <html>
     <head>
-        <title>QuickCredit|Signup</title>
-        <link rel="stylesheet" href="../../css/usersignup.css">
+        <title>
+          QuickCredit|Loan Repayment
+        </title>
+        <link rel="stylesheet" href="../../css/loan-repayment.css">
     </head>
     <body>
-            <!-- Header definition -->
-<nav class="header"> 
+         <!-- Header definition -->
+    <nav class="header"> 
         <div class="logo-name-div">
             <div class="icon-div">
              <img class="icon-logo" src="../../assets/images/quick_logo.PNG" alt="Logo required"/>
             </div>
             
          </div>
-
+    
             <div class="link-div services ">
               
-                <a id="a-servise" class="a-servises " href="../../index.html">Home</a>
+                <a id="a-servise" class="a-servises " href="dashboard.html">Home</a>
             </div>
+            <div class="link-div loans-menu ">
+             <div class="dropdown">
+                <button class="btn-loan" id="btnLoan">Loan</button>
+                <div class="dropdown-content">
+                    <a href="loan.html" >Apply for a loan</a>
+                    <a href="Loaninfo.html">View loan</a>
+                </div> 
+                </div> 
+            </div>
+    
+            <div class="link-div loans-menu ">
+                    <div class="dropdown">
+                       <button class="btn-loan" id="btnLoan">Repayment</button>
+                       <div class="dropdown-content">
+                           <a href="#" >Pay a loan</a>
+                           <a href="history.html">Repayment history</a>
+
+                       </div> 
+                       </div> 
+                   </div>
+    
             <div class="link-div support">
                 <a href="html/About.html">About</a>
             </div>
-   
-    <div class="buttons-join login">
-        <form  action="../user/login.html">
-            <button name="button" onclick="changeThems()">Login</button>
-        </form>
+    
+            <div class="buttons-join logout">
+                    <form  action="../user/login.html">
+                        <button name="button" onclick="changeThems()">Logout</button>
+                    </form>
+                    </div>
+            <div class="buttons-join lbl-username">
+                <label >User name</label>
+             </div>  
         </div>
-        <div class="buttons-join sinup">
-            <form action="#">
-            <button name="button">Sign Up</button>
-        </form>
-    </div>
-</nav>
- <!-- End of Header definition -->
-<!-- Body definition -->
-  <div class="main-container ">
-            <div class="form-container">
-                    <form action="dashboard.html">
-                   <div id="signup-div" >
-                       <div class="head-signup">
-                           <h3>Sign up here</h3>
-                       </div>
-                       <div class="row-signup">
-                          <label class="required">First name</label> <br/>
-                          <input type="text" name="firtName" class="texts" />
-                       </div>
-                       <div class="row-signup">
-                           <label class="required">Last name</label> <br/>
-                           <input type="text" name="lastName" class="texts" />
+    </nav>
+    <!-- End of Header definition -->
+
+    <!-- All about header -->
+    <div class="home-div">
+            
+        <div class="main-container">
+                <form action="dashboard.html">
+               <div id="signup-div" >
+                   <div class="head-signup">
+                       <div  class="head-message">
+                            <h3>Loan repayment</h3>
                        </div>
 
-                       <div class="row-signup">
-                           <label class="required">Email</label> <br/>
-                           <input type="email" name="email" class="texts" />
+                       <div class="close-div" onclick="hideLoanForm()">
+                         X
                        </div>
-                       <div class="row-signup">
-                            <label class="required">Address</label> <br/>
-                            <input type="text" name="address" class="texts" />
-                        </div>
-                       <div class="row-signup">
-                           <label class="required">Username</label> <br/>
-                           <input type="text" name="username" class="texts" />
-                        </div>
-                        <div class="row-signup">
-                                <label class="required">User role</label> <br/>
-                                <select name="userrole" id="userrole" class="texts">
-                                    <option >Select user roler</option>
-                                    <option >Admin</option>
-                                    <option >Client</option>
-                                </select>
-                        </div>
+                       
+                   </div>
+                   <div class="head-loan">
+                      <label class="required">Loan id</label><br/>
+                      <select name="" id="" class="texts" name="loanid">
+                          <option >1</option>
+                      </select>
+                   </div>
+                   <div class="head-loan">
+                    <label class="required">Created on</label> <br/>
+                    <input type="date" name="createdon" class="texts" />
+                </div>
+                   <div class="head-loan">
+                       <label class="required">Amount</label> <br/>
+                       <input type="number" name="amount" class="texts" />
+                   </div>
+                   <div class="row-signup-action">
+                     <input type="reset" name="reset" class="buttons" id="btnRes" value="Clear">
+                     <input type="submit" name="btnSubmit" class="buttons" id="btnSub" value="Pay a loan">   
+                   </div>
+               </div> 
+           </form>
+            </div> 
+      
+      </div>
+    <!-- End of header -->
 
-                        <div class="row-signup">
-                           <label class="required">Password</label> <br/>
-                           <input type="password" name="password" class="texts-pass" placeholder="Input password"/>
-                           <input type="password" name="password" class="texts-pass" placeholder="Cofirm password"/>
-                       </div>
-
-
-                       <div class="row-signup-action">
-                         <input type="reset" name="reset" class="buttons" id="btnRes" value="Clear">
-                         <input type="submit" name="btnSubmit" class="buttons" id="btnSub" value="Submit">   
-                       </div>
-                   </div> 
-               </form>
-                </div> 
-  </div>
-<!-- Body end -->
-
-
-
-  <!-- Footer definition -->
-<footer class="footer-area">
+     <!-- Footer definition -->
+     <footer class="footer-area">
         <div class="col-y-content">
             <div class="footer-single-widget">
                 <a href="#"><img width="50px" height="50px" src="../../assets/images/quick_logo.PNG" alt=""></a>
@@ -122,16 +129,16 @@
                 <svg class="footer-icon tumbr" viewBox="0 0 32 32"><use xlink:href="#icon-tumbr"></use></svg>
                 <svg class="footer-icon vk" viewBox="0 0 32 32"><use xlink:href="#icon-vk"></use></svg>
                 <svg class="footer-icon facebook" viewBox="0 0 32 32"><use xlink:href="#icon-facebook"></use></svg>
-
+    
             </div>
         </div>
-</footer>
-
-
- <!--Define all Icon-->
-
-
- <svg version="1.1" style="display: none;">
+    </footer>
+    
+    
+    <!--Define all Icon-->
+    
+    
+    <svg version="1.1" style="display: none;">
         <defs>
         <g id="icon-support">
             <path style="path1" d="M 13 1.1875 C 6.476563 1.1875 1.1875 6.476563 1.1875 13 C 1.1875 19.523438 6.476563 24.8125 13 24.8125 C 19.523438 24.8125 24.8125 19.523438 24.8125 13 C 24.8125 6.476563 19.523438 1.1875 13 1.1875 Z M 12.945313 20.214844 C 12.003906 20.214844 11.261719 19.472656 11.261719 18.53125 C 11.261719 17.589844 12.003906 16.847656 12.945313 16.847656 C 13.882813 16.847656 14.632813 17.589844 14.632813 18.53125 C 14.632813 19.472656 13.886719 20.214844 12.945313 20.214844 Z M 15.425781 12.582031 L 14.328125 13.535156 C 13.5 14.261719 13.640625 14.617188 13.640625 15.0625 L 12.410156 15.0625 L 12.410156 14.613281 C 12.410156 12.445313 14.480469 12.070313 14.480469 8.867188 C 14.480469 7.636719 14.078125 7.074219 13.054688 7.074219 C 12.113281 7.074219 11.691406 7.535156 11.828125 8.644531 C 11.910156 9.34375 11.207031 9.621094 10.746094 9.621094 C 10.226563 9.621094 9.785156 9.101563 9.785156 8.398438 C 9.785156 7.207031 11.035156 5.957031 13.210938 5.957031 C 15.328125 5.957031 17.175781 6.914063 17.175781 9.21875 C 17.179688 10.644531 16.65625 11.507813 15.425781 12.582031 Z "/>
@@ -167,6 +174,8 @@
         <path style="path1" d="M 3 8 L 3 26 L 29 26 L 29 8 Z M 7.3125 10 L 24.6875 10 L 16 15.78125 Z M 5 10.875 L 15.4375 17.84375 L 16 18.1875 L 16.5625 17.84375 L 27 10.875 L 27 24 L 5 24 Z "/>
         </g>
         </defs>
-        </svg>
+        </svg> 
+        <script type="text/javascript" src="../../js/loan.js">
+        </script> 
     </body>
 </html>

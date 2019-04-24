@@ -1,98 +1,164 @@
- <html>
-     <head>
-         <title>
-             QuickCredit|Login
-         </title>
-         <link rel="stylesheet" href="../../css/login.css">
-     </head>
-     <body>
-                <!-- Header definition -->
-        <nav class="header"> 
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Quick credit">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+        <meta name="author" content="Urimubenshi Daniel">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            QuickCredit|current loans
+        </title>
+        <link rel="stylesheet" href="../../../css/loans.css">
+    </head>
+    <body>
+          <!-- Header definition -->
+          <nav class="header"> 
             <div class="logo-name-div">
                 <div class="icon-div">
-                <img class="icon-logo" src="../../assets/images/quick_logo.PNG" alt="Logo required"/>
+                    <img class="icon-logo" src="../../../assets/images/quick_logo.PNG" alt="Logo required"/>
                 </div>
                 
-            </div>
-
-                <div class="link-div services">
-
-                    <a id="a-servise" class="a-servises " href="../../index.html">Home</a>
                 </div>
+        
+                <div class="link-div services ">
+                    
+                    <a id="a-servise" class="a-servises " href="dashboard.html">Home</a>
+                </div>
+                <div class="link-div loans-menu ">
+                    <div class="dropdown">
+                    <button class="btn-loan" id="btnLoan">Client</button>
+                    <div class="dropdown-content">
+                        <a href="clients.html" >All clients</a>
+                        <a href="verified.html">Verified clients</a>
+                        <a href="unverified.html">Unverified clients</a>
+        
+                    </div> 
+                    </div> 
+                </div>
+        
+                <div class="link-div loans-menu ">
+                        <div class="dropdown">
+                            <button class="btn-loan" id="btnLoan">Loans</button>
+                            <div class="dropdown-content">
+                                <a href="loans.html" >Loan applications</a>
+                                <a href="currentloans.html">Current loans </a>
+                                <a href="repaidloans.html">Repaid loans </a>
+                                <a href="loanrepayment.html">Post repayment </a>
+                            </div> 
+                            </div> 
+                        </div>
+        
                 <div class="link-div support">
                     <a href="html/About.html">About</a>
                 </div>
-
-        <div class="buttons-join login">
-            <form  action="#">
-                <button name="button" onclick="changeThems()">Login</button>
-            </form>
+        
+                <div class="buttons-join logout">
+                        <form  action="../login.html">
+                            <button name="button" onclick="changeThems()">Logout</button>
+                        </form>
+                        </div>
+        
+                <div class="buttons-join lbl-username">
+                    <label >User name</label>
+                    </div>
+        
+            
+                
             </div>
-            <div class="buttons-join sinup">
-
-                <form action="../../html/user/signup.html">
-                <button name="button">Sign Up</button>
-            </form>
-        </div>
         </nav>
         <!-- End of Header definition -->
-
-        <!-- Start of login body -->
-
-        
-            <div class="main-form-container">
-                <div class="form-container">
-                        <form name="login_form">
-                        <div class="login-contents">
-                        <div class="login-header">
-                            <p class="p-header">Login here</p>
-                        </div>
-                        <div class="login-body">
-                            <div class="inputs">
-                                <table>
-                                        <tr>
-                                            <td> <label class="lbls">Login as</label></td>
-                                            <td> <select name="userRoles" id="userRoles" class="txts">
-                                                <option >Select your role</option>
-                                                <option >Admin</option>
-                                                <option >Client</option>
-                                            </select></td>
-                                        </tr>
-                                    <tr>
-                                        <td> <label class="lbls">User name</label></td>
-                                        <td> <input type="text" name="userName" id="tztUserName" class="txts"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td> <label class="lbls">Password</label></td>
-                                        <td> <input type="password"  name="password" id="txtUserName" class="txts"/></td>
-                                    </tr>
-                                </table>
-                                
-                                
-                            </div>
-                            
-                        </div>
-                        <div class="login-footer">
-                            <table class="actions">
-                                <tr>
-                                    <td><input type="reset" id="btnReset" value="Reset" class="btns"></td>
-                                    <td><input type="button" id="btnLogin" value="Login" class="btns" onclick="checkIfIsAdmin(document.forms['login_form'])"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        </div>
-                        </form>
+          <!-- Body definition -->
+    <div class="main-container">
+        <div class="form-container">
+          <div class="content">
+            <div class="info-header">
+                <div class="info-div">
+                    <h3 id="h-info">Current loans</h3>
                 </div>
+                <div class="info-div">
+                    <div class="div-close">
+                     X
+                    </div>
+                 </div>
             </div>
-     
+            <div class="data-div">
+                <table border="0px" cellspacing="0" cellpadding="0">
+                   <tr class="row">
+                      <th class="id-cell" align="center">Loan id</th>
+                      <th class="data-head" align="center">User Email</th>
+                      <th class="data-head" align="center">Created on</th>
+                      <th class="data-head" align="center">Status</th>
+                      <th class="data-head" align="center">Repaid</th>
+                      <th class="data-head" align="center">Tenor</th>
+                      <th class="data-head" align="center">Amount</th>
+                      <th class="data-head" align="center">Installments</th>
+                      <th class="data-head" align="center">Balance</th>
+                      <th class="data-head" align="center">Interest</th>
+                      <th class="data-head" align="center">Action</th>
+                   </tr>
+                   <tr class="row data-row">
+                       <td class="data-id" align="center"> 1</td>
+                       <td class="data" align="center"> benshidanny11@gmail.com </td>
+                       <td class="data" align="center"> 2/2/2019 </td>
+                       <td class="data" align="center" id="status"> Unknown</td>
+                       <td class="data" align="center"> false</td>
+                       <td class="data" align="center"> 12 Months</td>
+                       <td class="data" align="center"> 1000000</td>
+                       <td class="data" align="center"> 80000 per month</td>
+                       <td class="data" align="center"> 700000</td>
+                       <td class="data" align="center" > 5000</td>      
+                       <td class="data" align="center">
+                        
+                        <img src="../../../assets/images/verified.png" alt="Approve logo" class="status-imgs" id="img-approve" onclick="approve()">
+                        <img src="../../../assets/images/regect.png" alt="Regect logo" class="reject" id="img-reject" onclick="regect()">
+                    </td>
+                   </tr>
+                   <tr class="row data-row">
+                    <td class="data-id" align="center"> 133</td>
+                    <td class="data" align="center"> keza11@gmail.com </td>
+                    <td class="data" align="center"> 2/7/2019 </td>
+                    <td class="data" align="center" id="status"> Approved</td>
+                    <td class="data" align="center"> false</td>
+                    <td class="data" align="center"> 6 Months</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center"> 10000 per month</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center" > 5000</td>      
+                    <td class="data" align="center">
+                     
+                     <img src="../../../assets/images/verified.png" alt="Approve logo" class="status-imgs" id="img-approve" onclick="approve1()">
+                    
+                 </td>
+                </tr>
+                <tr class="row data-row">
+                    <td class="data-id" align="center"> 12</td>
+                    <td class="data" align="center"> kalisa11@gmail.com </td>
+                    <td class="data" align="center"> 2/2/2019 </td>
+                    <td class="data" align="center" id="status2"> Unknown</td>
+                    <td class="data" align="center"> false</td>
+                    <td class="data" align="center"> 6 Months</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center"> 10000 per month</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center" > 5000</td>      
+                    <td class="data" align="center">
+                     
+                     <img src="../../../assets/images/verified.png" alt="Approve logo" class="status-imgs " id="img-approve2" onclick="approve2()">
+                     <img src="../../../assets/images/regect.png" alt="Regect logo" class="reject" id="img-reject2" onclick="regect2()">
+                 </td>
+                </tr>
 
-        <!-- End of login body -->
-
-     <!-- Footer definition -->
+                </table>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- End of body -->
+ <!-- Footer definition -->
 <footer class="footer-area">
     <div class="col-y-content">
         <div class="footer-single-widget">
-            <a href="#"><img width="50px" height="50px" src="../../assets/images/quick_logo.PNG" alt=""></a>
+            <a href="#"><img width="50px" height="50px" src="../../../assets/images/quick_logo.PNG" alt=""></a>
             <div class="copywrite-text mt-30">
                 <p>
                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | QuickCredit</p>
@@ -165,7 +231,9 @@
     <path style="path1" d="M 3 8 L 3 26 L 29 26 L 29 8 Z M 7.3125 10 L 24.6875 10 L 16 15.78125 Z M 5 10.875 L 15.4375 17.84375 L 16 18.1875 L 16.5625 17.84375 L 27 10.875 L 27 24 L 5 24 Z "/>
     </g>
     </defs>
-    </svg>
-    <script type="text/javascript" src="../../js/login.js"></script>
-</body>
+    </svg> 
+    <script type="text/javaScript" src="../../../js/loans.js">
+    </script>
+
+    </body>
 </html>

@@ -205,6 +205,7 @@ width: 100%;
       fill-rule:nonzero;
   }
   .footer-icon.facebook{
+
     fill: white;
 }
 
@@ -217,14 +218,18 @@ width: 100%;
 }
 .footer-icon.google
 {
+
     fill:white;
+
 }
 .footer-icon.tumbr{
    fill:  white;
 }
 .footer-icon.vk
 {
+
     fill:  white;
+
 }
   
   .col-x-content{
