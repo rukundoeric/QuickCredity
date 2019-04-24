@@ -232,7 +232,7 @@ All about body
  {
     margin-top: 50px;
     overflow: auto;
-    width: 1200px;
+    width: 1100px;
     height:560px;
     border: 1px solid var(--rayal-white-borders);
    
@@ -250,7 +250,7 @@ All about body
  }
  .info-div
  {   
-   width: 600px;
+   width: 500px;
    display: inline-block;
    height:70px;
  }
@@ -280,13 +280,13 @@ All about body
    }
 .data-div
 {
-    width: 1200px;
+    width: 1100px;
     display: inline-block;
     height:430px; 
 }
 .row
 {
-    width: 1200px;
+    width: 1100px;
     display: inline-block;
     height:30px;   
 
@@ -294,36 +294,35 @@ All about body
 .data-head
 {
     height:30px; 
-    width: 126px;
+    width: 130px;
     background-color: var(--rayol-primary-acent-color);
     color: aliceblue;
 }
 .id-cell
 {
-    width: 66px;
+    width: 60px;
     background-color: var(--rayol-primary-acent-color);
     color: aliceblue;
 }
 .data{
     height:30px; 
-    width: 126px;
+    width: 130px;
     max-width: 123px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    padding-left: 7px;
 }
 .data-id
 {
-    width: 66px; 
+    width:60px; 
 }
 .data-row
 {
     background-color: var(--rayol-primary-data-back);
 }
-
 .data-row:hover{
     background-color: var(--rayol-primary-data-back-hover); 
-    cursor: pointer;
 }
 
 .btn-verify-class
@@ -410,22 +409,22 @@ All about body
       fill:  var(--rayal-white);
   }
   .footer-icon.instagram{
-      fill: white;
+      fill:  white;
   }
   .footer-icon.twitter
   {
-      fill: white;
+      fill:white;
   }
   .footer-icon.google
   {
       fill:white;
   }
   .footer-icon.tumbr{
-     fill:  white;
+     fill: white;
   }
   .footer-icon.vk
   {
-      fill:  white;
+      fill: white;
   }
   
   .col-x-content{
