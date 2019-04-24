@@ -205,26 +205,26 @@ width: 100%;
       fill-rule:nonzero;
   }
   .footer-icon.facebook{
-      fill:  var(--rayal-white);
-  }
-  .footer-icon.instagram{
-      fill:  var(--rayol-orange-color);
-  }
-  .footer-icon.twitter
-  {
-      fill: var(--rayol-dark-red-color);
-  }
-  .footer-icon.google
-  {
-      fill: var(--rayal-light-green-color);
-  }
-  .footer-icon.tumbr{
-     fill:  var(--rayal-white);
-  }
-  .footer-icon.vk
-  {
-      fill:  var(--rayol-orange-color);
-  }
+    fill:  white;
+}
+.footer-icon.instagram{
+    fill:  white;
+}
+.footer-icon.twitter
+{
+    fill: white;
+}
+.footer-icon.google
+{
+    fill: white;
+}
+.footer-icon.tumbr{
+   fill:  white;
+}
+.footer-icon.vk
+{
+    fill: white;
+}
   
   .col-x-content{
       margin-left: 20px;
