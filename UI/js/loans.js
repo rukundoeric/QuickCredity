@@ -8,3 +8,6 @@ function regect()
     document.getElementById("status").innerHTML="Rejected";
     document.getElementById("img-approve").style.display="none";
 }
+document.getElementById("data-row-id").addEventListener("click",()=>{
+  window.location.href = 'specificloan.html';
+})
