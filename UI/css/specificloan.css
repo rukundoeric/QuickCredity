@@ -313,8 +313,13 @@ table tr:last-child {
   border-radius: 5px;
   margin-left: 20px;
   color: white;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
+}
+.btns:hover
+{
+  background-color: var(--rayol-primary-acent-color);
+  transition: 1s;
 }
 /* End of body */
 
