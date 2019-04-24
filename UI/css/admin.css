@@ -1,6 +1,4 @@
-/* Loan elements */
 @import url(default_them.css);
-
 *
 {
   margin: 0px;
@@ -202,48 +200,19 @@ color: var( --rayol-primary-color);
   .dropdown-content a:hover {background-color: var(--rayol-primary-acent-color);}
   
   .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .btn-loan {background-color: #3e8e41;}
 
 
 /*End of header*/
 
-* All about body */
-
-.main-container
+/* Body */
+.home-div
 {
-
-}
-#main-container
-{
-  width: 100%;
-  height: 650px;
-  background-image: url("../assets/images/loan-back.png");
-}
-.container
-{
-  width: 100%;
-  height: 650px;
-  background-color: var(--rayal-white-sec);
-  opacity: 0.8;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.contents
-{
-    width: 600px;
-    height: 470px;
-    border: 1px solid var(--rayal-white-borders);
-    border-radius: 5px
-}
-.content-head
-{
-    width: 600px;
-    height: 70px;  
-    background: var(--rayol-primary-color);
-    border-radius: 5px;
+    height: 650px;
+    width: 100%;
+    height: 650px;
+    background-image: url('../assets/images/loan-back.png');
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -251,81 +220,52 @@ color: var( --rayol-primary-color);
     justify-content: center;
     align-items: center;
 }
-h3
+.info
 {
-    color: var(--rayal-white);
-    font: outline;
-    font-family: Arial, Helvetica, sans-serif
-}
-.content-body
-{
-    width: 600px;
-    height: 350px;  
-}
-.content-footer
-{
-    border-top: 1px solid var(--rayal-white-borders);
-    width: 600px;
-    height: 50px;
-    background-color:  var(--rayol-primary-data-back);
+    height: 650px;
+    width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     justify-content: center;
     align-items: center;
-     
+    background: var(--rayal-white-sec);
+    opacity: 0.8;
 }
-.inner-footer
+#p-info
 {
-  height: 50px;
-  width: 400px;
-  display: inline-block;
-  display: flex;
-  padding-left: 150px;
+    max-width: 500px;
+    color: var(--rayol-primary-color);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
-.row
+#loan-div
 {
-  width: 600px;
-  height: 35px;
-  background-color:  var(--rayol-primary-data-back);
+    opacity: 0.8;
+    display: none;
+    height: 650px;
+    width: 100%; 
+    background: var(--rayal-white-sec);
 }
-
-.data
+.page-ingection
 {
-  width: 300px;
-  padding-left: 5px
+    height: 650px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
 }
-table {
-  border-collapse: collapse;
+iframe{
+    height: 650px;
+    width: 100%;
 }
-
-table tr {
- border-bottom: 1px solid var(--rayal-white-borders);;
-}
-
-table tr:last-child {
-  border: 0;
-}
-.btns
-{
-  width: 200px;
-  background: var(--rayol-primary-color);
-  height: 30px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-left: 20px;
-  color: white;
-  font-size: 14px;
-  outline: none;
-}
-.btns:hover
-{
-  background-color: var(--rayol-primary-acent-color);
-  transition: 1s;
-}
-/* End of body */
+.back-gradient {
+    height: 200px;
+    background-color: rgb(255, 255, 255); /* For browsers that do not support gradients */
+    /* background-image: linear-gradient(to right, rgb(222, 230, 230) , rgb(229, 239, 247)); Standard syntax (must be last) */
+  }
 
 /*Footer area*/
 .footer-area {
@@ -361,7 +301,6 @@ table tr:last-child {
 
 .footer-icon.instagram{
     fill: white;
-
 }
 .footer-icon.twitter
 {
@@ -369,19 +308,16 @@ table tr:last-child {
 }
 .footer-icon.google
 {
-
-    fill: white;
-
+    fill:white;
 }
 .footer-icon.tumbr{
    fill:  white;
 }
 .footer-icon.vk
 {
-
-    fill: white;
-
+    fill:  white;
 }
+
   
   .col-x-content{
       margin-left: 20px;

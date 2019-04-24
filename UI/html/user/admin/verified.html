@@ -1,18 +1,24 @@
 <html>
+
     <head>
+            <meta charset="UTF-8">
+            <meta name="description" content="Quick credit">
+            <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+            <meta name="author" content="Urimubenshi Daniel">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            QuickCredit|Loan info
+           QuickCredit|Verified clients
         </title>
-        <link rel="stylesheet" href="../../css/loanifo.css">
+        <link rel="stylesheet" href="../../../css/clients.css">
     </head>
     <body>
+        
 
-     <!-- Header definition -->
-    <nav class="header"> 
-
+           <!-- Header definition -->
+<nav class="header"> 
         <div class="logo-name-div">
             <div class="icon-div">
-             <img class="icon-logo" src="../../assets/images/quick_logo.PNG" alt="Logo required"/>
+             <img class="icon-logo" src="../../../assets/images/quick_logo.PNG" alt="Logo required"/>
             </div>
             
          </div>
@@ -23,20 +29,23 @@
             </div>
             <div class="link-div loans-menu ">
              <div class="dropdown">
-                <button class="btn-loan" id="btnLoan">Loan</button>
+                <button class="btn-loan" id="btnLoan">Client</button>
                 <div class="dropdown-content">
-                    <a href="loan.html" >Apply for a loan</a>
-                    <a href="Loaninfo.html">View loan</a>
+                    <a href="clients.html" >All clients</a>
+                    <a href="verified.html">Verified clients</a>
+                    <a href="unverified.html">Unverified clients</a>
                 </div> 
                 </div> 
             </div>
     
             <div class="link-div loans-menu ">
                     <div class="dropdown">
-                       <button class="btn-loan" id="btnLoan">Repayment</button>
+                       <button class="btn-loan" id="btnLoan">Loans</button>
                        <div class="dropdown-content">
-                           <a href="repayment.html" >Pay a loan</a>
-                           <a href="history.html">Repayment history</a>
+                           <a href="loans.html" >Loans application</a>
+                           <a href="currentloans.html">Current loans </a>
+                           <a href="repaidloans.html">Repaid loans </a>
+                           <a href="loanrepayment.html">Loan repayment </a>
                        </div> 
                        </div> 
                    </div>
@@ -46,7 +55,7 @@
             </div>
     
             <div class="buttons-join logout">
-                    <form  action="../user/login.html">
+                    <form  action="../login.html">
                         <button name="button" onclick="changeThems()">Logout</button>
                     </form>
                     </div>
@@ -60,48 +69,109 @@
         </div>
     </nav>
     <!-- End of Header definition -->
-
-    <!-- Body -->
     
-    <div class="main-container" id="main-container">
-        <div class="container">
-          <div class="contents">
-             <div class="content-head">
-                <h3>Loan information </h3>
-             </div>
-             <div class="content-body">
-              <table border="0" cellspacing="0" cellpadding="0">
-                <tr class="row"><td class="data">Loan id:</td><td class="data">1</td></tr>
- 
-                <tr class="row"><td class="data">User Email:</td><td class="data">benshidanny11@gmail.com</td></tr>
-                <tr class="row"><td class="data">Created on:</td><td class="data">2/2/2019</td></tr>
-                <tr class="row"><td class="data">Status:</td><td class="data">pending</td></tr>
-                <tr class="row"><td class="data">Repaid:</td><td class="data">false</td></tr>
-                <tr class="row"><td class="data">Tenor:</td><td class="data">200000</td></tr>
-                <tr class="row"><td class="data">Amount:</td><td class="data">10000 per month</td></tr>
-                <tr class="row"><td class="data">Installments:</td><td class="data">200000</td></tr>
-                <tr class="row"><td class="data">Balance:</td><td class="data">20000</td></tr>
-                <tr class="row"><td class="data">Interest:</td><td class="data">5 %</td></tr>
-              </table>
-             </div>
-             <div class="content-footer">
-                 <div class="inner-footer">
-                   <button class="btns" onclick="pay()">Pay this loan</button>
+    
+          <!-- Body definition -->
+        <div class="main-container">
+            <div class="form-container">
+              <div class="content">
+                <div class="info-header">
+                    <div class="info-div">
+                        <h3 id="h-info">Clients information</h3>
+                    </div>
+                    <div class="info-div">
+                        <div class="div-close">
+                         X
+                        </div>
+                     </div>
+                </div>
+                <div class="data-div">
+                    <table border="0px" cellspacing="0" cellpadding="0">
+                       <tr class="row">
+                          <th class="id-cell" align="center">Id</th>
+                          <th class="data-head" align="center">First name</th>
+                          <th class="data-head" align="center">Last name</th>
+                          <th class="data-head" align="center">Email</th>
+                          <th class="data-head" align="center">Address</th>
+                          <th class="data-head" align="center">User name</th>
+                          <th class="data-head" align="center">Password</th>
+                          <th class="data-head" align="center">Status</th>
+                          <th class="data-head" align="center">User role</th>
+                          <th class="data-head" align="center">Action</th>
+                       </tr>
 
-                 </div>
- 
-             </div>
-          </div>
+                       <tr class="row data-row">
+                        <td class="data-id" align="center"> 2</td>
+                        <td class="data" align="center"> Habi </td>
+                        <td class="data" align="center"> Hamis </td>
+                        <td class="data" align="center"> hamis@gmail.com</td>
+                        <td class="data" align="center"> Gisozi</td>
+                        <td class="data" align="center"> Hamis123</td>
+                        <td class="data" align="center"> 567890</td>
+                        <td class="data" align="center" id="Status"> Verified</td>
+                        <td class="data" align="center"> Client</td>
+                        <td class="data" align="center"> 
+                            <button id="btn-verify-2" class="btn-verify-class">Mark as verified</button>
+                            <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified-2" id="btn-ver2">
+                        </td>
+                    </tr>
+
+                    <tr class="row data-row">
+                     <td class="data-id" align="center"> 4</td>
+                     <td class="data" align="center"> Eric  </td>
+                     <td class="data" align="center"> rukundo </td>
+                     <td class="data" align="center"> rukundo@gmail.com</td>
+                     <td class="data" align="center"> Kakiru</td>
+                     <td class="data" align="center"> Eric111</td>
+                     <td class="data" align="center"> 567890</td>
+                     <td class="data" align="center" id="Status"> Verified</td>
+                     <td class="data" align="center"> Client</td>
+                     <td class="data" align="center"> <button id="btn-verify-2" class="btn-verify-class">Mark as verified</button>
+                        <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified-2" id="btn-ver2">
+                    </td>
+                 </tr>
+
+                <tr class="row data-row">
+                 <td class="data-id" align="center"> 6</td>
+                 <td class="data" align="center"> Nimpano </td>
+                 <td class="data" align="center"> Desire </td>
+                 <td class="data" align="center"> Desire@gmail.com</td>
+                 <td class="data" align="center"> Kimironko</td>
+                 <td class="data" align="center"> Desire322</td>
+                 <td class="data" align="center"> 567890</td>
+                 <td class="data" align="center" id="Status"> Verified</td>
+                 <td class="data" align="center"> Client</td>
+                 <td class="data" align="center"> <button id="btn-verify-2" class="btn-verify-class">Mark as verified</button>
+                    <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified-2" id="btn-ver2">
+                </td>
+             </tr>
+      
+            <tr class="row data-row">
+             <td class="data-id" align="center"> 8</td>
+             <td class="data" align="center"> Habi </td>
+             <td class="data" align="center"> Hamis </td>
+             <td class="data" align="center"> hamis@gmail.com</td>
+             <td class="data" align="center"> Gisozi</td>
+             <td class="data" align="center"> Hamis123</td>
+             <td class="data" align="center"> 567890</td>
+             <td class="data" align="center" id="Status"> Verified</td>
+             <td class="data" align="center"> Client</td>
+             <td class="data" align="center"> <button id="btn-verify-2" class="btn-verify-class">Mark as verified</button>
+                <img src="../../../assets/images/verified.png" alt="Verified logo" class="img-verified-2" id="btn-ver2">
+            </td>
+         </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
         </div>
-     </div>
- 
-     <!-- End of body -->
-
-        <!-- Footer definition -->
-        <footer class="footer-area">
+        <!-- End of body -->
+        
+            <!-- Footer definition -->
+            <footer class="footer-area">
                 <div class="col-y-content">
                     <div class="footer-single-widget">
-                        <a href="#"><img width="50px" height="50px" src="../../assets/images/quick_logo.PNG" alt=""></a>
+                        <a href="#"><img width="50px" height="50px" src="../../../assets/images/quick_logo.PNG" alt=""></a>
                         <div class="copywrite-text mt-30">
                             <p>
                              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | QuickCredit</p>
@@ -175,7 +245,7 @@
                 </g>
                 </defs>
                 </svg> 
-                <script type="text/javascript" src="../../js/loan.js">
-                </script> 
+
+
     </body>
 </html>

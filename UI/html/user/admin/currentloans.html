@@ -1,91 +1,164 @@
 <html>
     <head>
-      <title>
-          QuickCredit|dashboard
-
-      </title>
-      <link rel="stylesheet" href="../../css/user-dashboard.css">
+        <meta charset="UTF-8">
+        <meta name="description" content="Quick credit">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+        <meta name="author" content="Urimubenshi Daniel">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            QuickCredit|current loans
+        </title>
+        <link rel="stylesheet" href="../../../css/loans.css">
     </head>
     <body>
-                   <!-- Header definition -->
-<nav class="header"> 
-    <div class="logo-name-div">
-        <div class="icon-div">
-         <img class="icon-logo" src="../../assets/images/quick_logo.PNG" alt="Logo required"/>
-        </div>
-        
-     </div>
-
-        <div class="link-div services ">
-          
-            <a id="a-servise" class="a-servises " href="#">Home</a>
-        </div>
-        <div class="link-div loans-menu ">
-         <div class="dropdown">
-            <button class="btn-loan" id="btnLoan">Loan</button>
-            <div class="dropdown-content">
-                <a href="loan.html" >Apply for a loan</a>
-                <a href="loaninfo.html">View loan</a>
-            </div> 
-            </div> 
-        </div>
-
-        <div class="link-div loans-menu ">
-                <div class="dropdown">
-                   <button class="btn-loan" id="btnLoan">Repayment</button>
-                   <div class="dropdown-content">
-                       <a href="repayment.html" >Pay a loan</a>
-                       <a href="history.html">Repayment history</a>
-                   </div> 
-                   </div> 
-               </div>
-
-        <div class="link-div support">
-            <a href="html/About.html">About</a>
-        </div>
-
-        <div class="buttons-join logout">
-                <form  action="../user/login.html">
-                    <button name="button" onclick="changeThems()">Logout</button>
-                </form>
+          <!-- Header definition -->
+          <nav class="header"> 
+            <div class="logo-name-div">
+                <div class="icon-div">
+                    <img class="icon-logo" src="../../../assets/images/quick_logo.PNG" alt="Logo required"/>
                 </div>
-
-        <div class="buttons-join lbl-username">
-            <label >User name</label>
-         </div>
-
-   
+                
+                </div>
         
-    </div>
-</nav>
-<!-- End of Header definition -->
-
-<div class="home-div">
-  <div class="info" id="info">
-    <p id="p-info">
-            A loan note is a type of financial instrument; it is a contract for a loan that specifies when the loan must be repaid and usually also the interest payable.
-             It is similar to a promissory note but the differences can be significant in terms of consequences, especially tax consequences. 
-             Chief of these is that by specifying the interest payable, the lender may obtain a tax shield.
-             Loan notes are simple but important instruments in business and finance. 
-             A loan note can also be conceived of as a form of deferred payment,
-             and in the UK the tax treatment of loan notes is as either ‘qualifying corporate bonds’ (QCBs), which provide a tax shield, or as ‘non-qualifying corporate bonds’ (non-QCBs) Loan notes may contain other provisions such as convertibility into equity or other kinds of debt,
-            in which case they are called "convertible loan notes".
-            The loan note is one of the most widely used instruments in financing the entrepreneurial venture and in start-ups.
-    </p>
-  </div>
-  <div class="loan-application" id="loan-div">
-    <div class="page-ingection">
-      <iframe  src="loan.html"></iframe>
-    </div>
+                <div class="link-div services ">
+                    
+                    <a id="a-servise" class="a-servises " href="dashboard.html">Home</a>
+                </div>
+                <div class="link-div loans-menu ">
+                    <div class="dropdown">
+                    <button class="btn-loan" id="btnLoan">Client</button>
+                    <div class="dropdown-content">
+                        <a href="clients.html" >All clients</a>
+                        <a href="verified.html">Verified clients</a>
+                        <a href="unverified.html">Unverified clients</a>
         
-</div>
-</div>
+                    </div> 
+                    </div> 
+                </div>
+        
+                <div class="link-div loans-menu ">
+                        <div class="dropdown">
+                            <button class="btn-loan" id="btnLoan">Loans</button>
+                            <div class="dropdown-content">
+                                <a href="loans.html" >Loan applications</a>
+                                <a href="currentloans.html">Current loans </a>
+                                <a href="repaidloans.html">Repaid loans </a>
+                                <a href="loanrepayment.html">Post repayment </a>
+                            </div> 
+                            </div> 
+                        </div>
+        
+                <div class="link-div support">
+                    <a href="html/About.html">About</a>
+                </div>
+        
+                <div class="buttons-join logout">
+                        <form  action="../login.html">
+                            <button name="button" onclick="changeThems()">Logout</button>
+                        </form>
+                        </div>
+        
+                <div class="buttons-join lbl-username">
+                    <label >User name</label>
+                    </div>
+        
+            
+                
+            </div>
+        </nav>
+        <!-- End of Header definition -->
+          <!-- Body definition -->
+    <div class="main-container">
+        <div class="form-container">
+          <div class="content">
+            <div class="info-header">
+                <div class="info-div">
+                    <h3 id="h-info">Current loans</h3>
+                </div>
+                <div class="info-div">
+                    <div class="div-close">
+                     X
+                    </div>
+                 </div>
+            </div>
+            <div class="data-div">
+                <table border="0px" cellspacing="0" cellpadding="0">
+                   <tr class="row">
+                      <th class="id-cell" align="center">Loan id</th>
+                      <th class="data-head" align="center">User Email</th>
+                      <th class="data-head" align="center">Created on</th>
+                      <th class="data-head" align="center">Status</th>
+                      <th class="data-head" align="center">Repaid</th>
+                      <th class="data-head" align="center">Tenor</th>
+                      <th class="data-head" align="center">Amount</th>
+                      <th class="data-head" align="center">Installments</th>
+                      <th class="data-head" align="center">Balance</th>
+                      <th class="data-head" align="center">Interest</th>
+                      <th class="data-head" align="center">Action</th>
+                   </tr>
+                   <tr class="row data-row">
+                       <td class="data-id" align="center"> 1</td>
+                       <td class="data" align="center"> benshidanny11@gmail.com </td>
+                       <td class="data" align="center"> 2/2/2019 </td>
+                       <td class="data" align="center" id="status"> Unknown</td>
+                       <td class="data" align="center"> false</td>
+                       <td class="data" align="center"> 12 Months</td>
+                       <td class="data" align="center"> 1000000</td>
+                       <td class="data" align="center"> 80000 per month</td>
+                       <td class="data" align="center"> 700000</td>
+                       <td class="data" align="center" > 5000</td>      
+                       <td class="data" align="center">
+                        
+                        <img src="../../../assets/images/verified.png" alt="Approve logo" class="status-imgs" id="img-approve" onclick="approve()">
+                        <img src="../../../assets/images/regect.png" alt="Regect logo" class="reject" id="img-reject" onclick="regect()">
+                    </td>
+                   </tr>
+                   <tr class="row data-row">
+                    <td class="data-id" align="center"> 133</td>
+                    <td class="data" align="center"> keza11@gmail.com </td>
+                    <td class="data" align="center"> 2/7/2019 </td>
+                    <td class="data" align="center" id="status"> Approved</td>
+                    <td class="data" align="center"> false</td>
+                    <td class="data" align="center"> 6 Months</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center"> 10000 per month</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center" > 5000</td>      
+                    <td class="data" align="center">
+                     
+                     <img src="../../../assets/images/verified.png" alt="Approve logo" class="status-imgs" id="img-approve" onclick="approve1()">
+                    
+                 </td>
+                </tr>
+                <tr class="row data-row">
+                    <td class="data-id" align="center"> 12</td>
+                    <td class="data" align="center"> kalisa11@gmail.com </td>
+                    <td class="data" align="center"> 2/2/2019 </td>
+                    <td class="data" align="center" id="status2"> Unknown</td>
+                    <td class="data" align="center"> false</td>
+                    <td class="data" align="center"> 6 Months</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center"> 10000 per month</td>
+                    <td class="data" align="center"> 200000</td>
+                    <td class="data" align="center" > 5000</td>      
+                    <td class="data" align="center">
+                     
+                     <img src="../../../assets/images/verified.png" alt="Approve logo" class="status-imgs " id="img-approve2" onclick="approve2()">
+                     <img src="../../../assets/images/regect.png" alt="Regect logo" class="reject" id="img-reject2" onclick="regect2()">
+                 </td>
+                </tr>
 
+                </table>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- End of body -->
  <!-- Footer definition -->
- <footer class="footer-area">
+<footer class="footer-area">
     <div class="col-y-content">
         <div class="footer-single-widget">
-            <a href="#"><img width="50px" height="50px" src="../../assets/images/quick_logo.PNG" alt=""></a>
+            <a href="#"><img width="50px" height="50px" src="../../../assets/images/quick_logo.PNG" alt=""></a>
             <div class="copywrite-text mt-30">
                 <p>
                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | QuickCredit</p>
@@ -159,7 +232,8 @@
     </g>
     </defs>
     </svg> 
-    <script type="text/javascript" src="../../js/loan.js">
+    <script type="text/javaScript" src="../../../js/loans.js">
     </script>
-</body>
+
+    </body>
 </html>

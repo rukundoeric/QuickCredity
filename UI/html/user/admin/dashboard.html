@@ -1,17 +1,23 @@
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Quick credit">
+        <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+        <meta name="author" content="Urimubenshi Daniel">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>
           QuickCredit|dashboard
 
       </title>
-      <link rel="stylesheet" href="../../css/user-dashboard.css">
+      <link rel="stylesheet" href="../../../css/admin.css">
     </head>
+
     <body>
                    <!-- Header definition -->
 <nav class="header"> 
     <div class="logo-name-div">
         <div class="icon-div">
-         <img class="icon-logo" src="../../assets/images/quick_logo.PNG" alt="Logo required"/>
+         <img class="icon-logo" src="../../../assets/images/quick_logo.PNG" alt="Logo required"/>
         </div>
         
      </div>
@@ -22,20 +28,24 @@
         </div>
         <div class="link-div loans-menu ">
          <div class="dropdown">
-            <button class="btn-loan" id="btnLoan">Loan</button>
+            <button class="btn-loan" id="btnLoan">Client</button>
             <div class="dropdown-content">
-                <a href="loan.html" >Apply for a loan</a>
-                <a href="loaninfo.html">View loan</a>
+                <a href="clients.html" >All clients</a>
+                <a href="verified.html">Verified clients</a>
+                <a href="unverified.html">Unverified clients</a>
+
             </div> 
             </div> 
         </div>
 
         <div class="link-div loans-menu ">
                 <div class="dropdown">
-                   <button class="btn-loan" id="btnLoan">Repayment</button>
+                   <button class="btn-loan" id="btnLoan">Loans</button>
                    <div class="dropdown-content">
-                       <a href="repayment.html" >Pay a loan</a>
-                       <a href="history.html">Repayment history</a>
+                       <a href="loans.html" >Loan applications</a>
+                       <a href="currentloans.html">Current loans </a>
+                       <a href="repaidloans.html">Repaid loans </a>
+                       <a href="loanrepayment.html">Post repayment </a>
                    </div> 
                    </div> 
                </div>
@@ -45,7 +55,7 @@
         </div>
 
         <div class="buttons-join logout">
-                <form  action="../user/login.html">
+                <form  action="../login.html">
                     <button name="button" onclick="changeThems()">Logout</button>
                 </form>
                 </div>
@@ -63,14 +73,15 @@
 <div class="home-div">
   <div class="info" id="info">
     <p id="p-info">
-            A loan note is a type of financial instrument; it is a contract for a loan that specifies when the loan must be repaid and usually also the interest payable.
-             It is similar to a promissory note but the differences can be significant in terms of consequences, especially tax consequences. 
-             Chief of these is that by specifying the interest payable, the lender may obtain a tax shield.
-             Loan notes are simple but important instruments in business and finance. 
-             A loan note can also be conceived of as a form of deferred payment,
-             and in the UK the tax treatment of loan notes is as either ‘qualifying corporate bonds’ (QCBs), which provide a tax shield, or as ‘non-qualifying corporate bonds’ (non-QCBs) Loan notes may contain other provisions such as convertibility into equity or other kinds of debt,
-            in which case they are called "convertible loan notes".
-            The loan note is one of the most widely used instruments in financing the entrepreneurial venture and in start-ups.
+            A system administrator, or sysadmin, is a person who is responsible for the upkeep,
+             configuration, and reliable operation of computer systems; especially multi-user computers, 
+             such as servers. The system administrator seeks to ensure that the uptime, performance,
+              resources, and security of the computers they manage meet the needs of the users,
+               without exceeding a set budget when doing so.
+
+            To meet these needs, a system administrator may acquire, install, or upgrade computer components
+             and software; provide routine automation; maintain security policies; troubleshoot; train or
+              supervise staff; or offer technical support for projects
     </p>
   </div>
   <div class="loan-application" id="loan-div">
@@ -85,7 +96,7 @@
  <footer class="footer-area">
     <div class="col-y-content">
         <div class="footer-single-widget">
-            <a href="#"><img width="50px" height="50px" src="../../assets/images/quick_logo.PNG" alt=""></a>
+            <a href="#"><img width="50px" height="50px" src="../../../assets/images/quick_logo.PNG" alt=""></a>
             <div class="copywrite-text mt-30">
                 <p>
                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | QuickCredit</p>

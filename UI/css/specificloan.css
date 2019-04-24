@@ -1,6 +1,4 @@
-/* Loan elements */
 @import url(default_them.css);
-
 *
 {
   margin: 0px;
@@ -185,7 +183,7 @@ color: var( --rayol-primary-color);
   }
   
   .dropdown-content a {
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -202,17 +200,15 @@ color: var( --rayol-primary-color);
   .dropdown-content a:hover {background-color: var(--rayol-primary-acent-color);}
   
   .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .btn-loan {background-color: #3e8e41;}
 
 
 /*End of header*/
 
-* All about body */
+/* All about body */
 
 .main-container
-{
-
-}
-#main-container
 {
   width: 100%;
   height: 650px;
@@ -282,7 +278,7 @@ h3
   width: 400px;
   display: inline-block;
   display: flex;
-  padding-left: 150px;
+  margin-left: 10px;
 }
 .row
 {
@@ -309,7 +305,7 @@ table tr:last-child {
 }
 .btns
 {
-  width: 200px;
+  width: 150px;
   background: var(--rayol-primary-color);
   height: 30px;
   margin-top: 10px;
@@ -355,33 +351,26 @@ table tr:last-child {
       fill-rule:nonzero;
   }
   .footer-icon.facebook{
-
-    fill: white;
-}
-
-.footer-icon.instagram{
-    fill: white;
-
-}
-.footer-icon.twitter
-{
-    fill: white;
-}
-.footer-icon.google
-{
-
-    fill: white;
-
-}
-.footer-icon.tumbr{
-   fill:  white;
-}
-.footer-icon.vk
-{
-
-    fill: white;
-
-}
+      fill:white;
+  }
+  .footer-icon.instagram{
+      fill: white;
+  }
+  .footer-icon.twitter
+  {
+      fill: white;
+  }
+  .footer-icon.google
+  {
+      fill: white;
+  }
+  .footer-icon.tumbr{
+     fill:  white;
+  }
+  .footer-icon.vk
+  {
+      fill: white;
+  }
   
   .col-x-content{
       margin-left: 20px;
