@@ -37,3 +37,9 @@ function postTransaction()
 {
   window.location.href = 'dashboard.html';
 }
+function approve(){
+  window.location.href = 'dashboard.html';
+}
+function reject(){
+  window.location.href = 'dashboard.html';
+}
