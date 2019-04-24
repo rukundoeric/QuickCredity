@@ -302,11 +302,13 @@ table {
 
 table tr {
  border-bottom: 1px solid var(--rayal-white-borders);;
+
 }
 
 table tr:last-child {
   border: 0;
 }
+
 .btns
 {
   width: 200px;
@@ -370,7 +372,9 @@ table tr:last-child {
 .footer-icon.google
 {
 
-    fill:white;
+
+    fill: white;
+
 
 }
 .footer-icon.tumbr{
@@ -378,8 +382,8 @@ table tr:last-child {
 }
 .footer-icon.vk
 {
-    fill:  white;
 
+    fill:  white;
 }
   
   .col-x-content{
