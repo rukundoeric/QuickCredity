@@ -8,6 +8,7 @@ function regect()
     document.getElementById("status").innerHTML="Rejected";
     document.getElementById("img-approve").style.display="none";
 }
+
 function approve2()
 {
   document.getElementById("status2").innerHTML="Approved";
@@ -43,3 +44,4 @@ function approve(){
 function reject(){
   window.location.href = 'dashboard.html';
 }
+
