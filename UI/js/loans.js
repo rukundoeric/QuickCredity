@@ -8,6 +8,7 @@ function regect()
     document.getElementById("status").innerHTML="Rejected";
     document.getElementById("img-approve").style.display="none";
 }
+
 function approve2()
 {
   document.getElementById("status2").innerHTML="Approved";
