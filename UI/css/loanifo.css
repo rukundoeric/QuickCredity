@@ -206,19 +206,22 @@ color: var( --rayol-primary-color);
 
 /*End of header*/
 
-/*
-All about body 
- */
- .main-container
+* All about body */
+
+.main-container
 {
-  height: 650px;
+
+}
+#main-container
+{
   width: 100%;
+  height: 650px;
   background-image: url("../assets/images/loan-back.png");
 }
- .form-container
- {
-  height: 650px;
+.container
+{
   width: 100%;
+  height: 650px;
   background-color: var(--rayal-white-sec);
   opacity: 0.8;
   display: -webkit-box;
@@ -227,117 +230,102 @@ All about body
   display: flex;
   justify-content: center;
   align-items: center;
- }
- .content
- {
-    margin-top: 50px;
-    overflow: auto;
-    width: 900px;
-    height:560px;
+}
+.contents
+{
+    width: 600px;
+    height: 470px;
     border: 1px solid var(--rayal-white-borders);
-   
- }
-
- .info-header
- {
-    width: 900px;
-    height:70px;
-    border: 1px solid var(--rayal-white-borders);
-    background-color: var(--rayol-primary-color);
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
- }
- .info-div
- {   
-   width: 450px;
-   display: inline-block;
-   height:70px;
- }
- #h-info
- {
-   color: var(--rayal-white);
-   float: right;
-   margin-top: 27px;
- }
- .div-close
- {
-    float: right;
+    border-radius: 5px
+}
+.content-head
+{
+    width: 600px;
+    height: 70px;  
+    background: var(--rayol-primary-color);
+    border-radius: 5px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
-    height:20px;
-    border-radius: 50px;
-    background-color: var(--rayol-primary-acent-color);
-    color: var(--rayol-primary-color);
- }
- .div-close:hover{
-    cursor: pointer;
-    background-color: var( --rayol-primary-acent-hover-color);
-   }
-.data-div
+}
+h3
 {
-    width: 900px;
-    display: inline-block;
-    height:430px; 
+    color: var(--rayal-white);
+    font: outline;
+    font-family: Arial, Helvetica, sans-serif
+}
+.content-body
+{
+    width: 600px;
+    height: 350px;  
+}
+.content-footer
+{
+    border-top: 1px solid var(--rayal-white-borders);
+    width: 600px;
+    height: 50px;
+    background-color:  var(--rayol-primary-data-back);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     
+}
+.inner-footer
+{
+  height: 50px;
+  width: 400px;
+  display: inline-block;
+  display: flex;
+  padding-left: 150px;
 }
 .row
 {
-    width: 900px;
-    display: inline-block;
-    height:30px;   
-
-}
-.data-head
-{
-    height:30px; 
-    width: 140px;
-    background-color: var(--rayol-primary-acent-color);
-    color: aliceblue;
-}
-.id-cell
-{
-    width: 60px;
-    background-color: var(--rayol-primary-acent-color);
-    color: aliceblue;
-}
-.data{
-    height:30px; 
-    width: 140px;
-   
-}
-.data-id
-{
-    width: 60px; 
-}
-.data-row
-{
-    background-color: var(--rayol-primary-data-back);
-}
-.data-row:hover{
-    background-color: var(--rayol-primary-data-back-hover); 
+  width: 600px;
+  height: 35px;
+  background-color:  var(--rayol-primary-data-back);
 }
 
-#btn-pay-in-loan-info
+.data
 {
-    height:25px; 
-    width: 100px;
-    border: none;
-    border-radius: 4px;
-    background-color: var(--rayol-primary-color);
+  width: 300px;
+  padding-left: 5px
 }
-#btn-pay-in-loan-info:hover
+table {
+  border-collapse: collapse;
+}
+
+table tr {
+ border-bottom: 1px solid var(--rayal-white-borders);;
+}
+
+table tr:last-child {
+  border: 0;
+}
+.btns
 {
-  cursor: pointer;
+  width: 200px;
+  background: var(--rayol-primary-color);
+  height: 30px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 20px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+.btns:hover
+{
   background-color: var(--rayol-primary-acent-color);
+  transition: 1s;
 }
-
-
- /* Body end */
-
+/* End of body */
 
 /*Footer area*/
 .footer-area {
@@ -367,26 +355,27 @@ All about body
       fill-rule:nonzero;
   }
   .footer-icon.facebook{
-      fill:  var(--rayal-white);
-  }
-  .footer-icon.instagram{
-      fill:  var(--rayol-orange-color);
-  }
-  .footer-icon.twitter
-  {
-      fill: var(--rayol-dark-red-color);
-  }
-  .footer-icon.google
-  {
-      fill: var(--rayal-light-green-color);
-  }
-  .footer-icon.tumbr{
-     fill:  var(--rayal-white);
-  }
-  .footer-icon.vk
-  {
-      fill:  var(--rayol-orange-color);
-  }
+    fill: white;
+}
+
+.footer-icon.instagram{
+    fill: white;
+}
+.footer-icon.twitter
+{
+    fill: white;
+}
+.footer-icon.google
+{
+    fill:white;
+}
+.footer-icon.tumbr{
+   fill:  white;
+}
+.footer-icon.vk
+{
+    fill:  white;
+}
   
   .col-x-content{
       margin-left: 20px;
