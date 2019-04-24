@@ -1,95 +1,88 @@
- <html>
-     <head>
-         <title>
-             QuickCredit|Login
-         </title>
-         <link rel="stylesheet" href="../../css/login.css">
-     </head>
-     <body>
-                <!-- Header definition -->
-        <nav class="header"> 
-            <div class="logo-name-div">
-                <div class="icon-div">
-                <img class="icon-logo" src="../../assets/images/quick_logo.PNG" alt="Logo required"/>
-                </div>
-                
-            </div>
+<html>
+    <head>
+      <title>
+          QuickCredit|dashboard
 
-                <div class="link-div services">
-
-                    <a id="a-servise" class="a-servises " href="../../index.html">Home</a>
-                </div>
-                <div class="link-div support">
-                    <a href="html/About.html">About</a>
-                </div>
-
-        <div class="buttons-join login">
-            <form  action="#">
-                <button name="button" onclick="changeThems()">Login</button>
-            </form>
-            </div>
-            <div class="buttons-join sinup">
-
-                <form action="../../html/user/signup.html">
-                <button name="button">Sign Up</button>
-            </form>
+      </title>
+      <link rel="stylesheet" href="../../css/user-dashboard.css">
+    </head>
+    <body>
+                   <!-- Header definition -->
+<nav class="header"> 
+    <div class="logo-name-div">
+        <div class="icon-div">
+         <img class="icon-logo" src="../../assets/images/quick_logo.PNG" alt="Logo required"/>
         </div>
-        </nav>
-        <!-- End of Header definition -->
-
-        <!-- Start of login body -->
-
         
-            <div class="main-form-container">
-                <div class="form-container">
-                        <form name="login_form">
-                        <div class="login-contents">
-                        <div class="login-header">
-                            <p class="p-header">Login here</p>
-                        </div>
-                        <div class="login-body">
-                            <div class="inputs">
-                                <table>
-                                        <tr>
-                                            <td> <label class="lbls">Login as</label></td>
-                                            <td> <select name="userRoles" id="userRoles" class="txts">
-                                                <option >Select your role</option>
-                                                <option >Admin</option>
-                                                <option >Client</option>
-                                            </select></td>
-                                        </tr>
-                                    <tr>
-                                        <td> <label class="lbls">User name</label></td>
-                                        <td> <input type="text" name="userName" id="tztUserName" class="txts"/></td>
-                                    </tr>
-                                    <tr>
-                                        <td> <label class="lbls">Password</label></td>
-                                        <td> <input type="password"  name="password" id="txtUserName" class="txts"/></td>
-                                    </tr>
-                                </table>
-                                
-                                
-                            </div>
-                            
-                        </div>
-                        <div class="login-footer">
-                            <table class="actions">
-                                <tr>
-                                    <td><input type="reset" id="btnReset" value="Reset" class="btns"></td>
-                                    <td><input type="button" id="btnLogin" value="Login" class="btns" onclick="checkIfIsAdmin(document.forms['login_form'])"></td>
-                                </tr>
-                            </table>
-                        </div>
-                        </div>
-                        </form>
+     </div>
+
+        <div class="link-div services ">
+          
+            <a id="a-servise" class="a-servises " href="#">Home</a>
+        </div>
+        <div class="link-div loans-menu ">
+         <div class="dropdown">
+            <button class="btn-loan" id="btnLoan">Loan</button>
+            <div class="dropdown-content">
+                <a href="loan.html" >Apply for a loan</a>
+                <a href="loaninfo.html">View loan</a>
+            </div> 
+            </div> 
+        </div>
+
+        <div class="link-div loans-menu ">
+                <div class="dropdown">
+                   <button class="btn-loan" id="btnLoan">Repayment</button>
+                   <div class="dropdown-content">
+                       <a href="repayment.html" >Pay a loan</a>
+                       <a href="history.html">Repayment history</a>
+                   </div> 
+                   </div> 
+               </div>
+
+        <div class="link-div support">
+            <a href="html/About.html">About</a>
+        </div>
+
+        <div class="buttons-join logout">
+                <form  action="../user/login.html">
+                    <button name="button" onclick="changeThems()">Logout</button>
+                </form>
                 </div>
-            </div>
-     
 
-        <!-- End of login body -->
+        <div class="buttons-join lbl-username">
+            <label >User name</label>
+         </div>
 
-     <!-- Footer definition -->
-<footer class="footer-area">
+   
+        
+    </div>
+</nav>
+<!-- End of Header definition -->
+
+<div class="home-div">
+  <div class="info" id="info">
+    <p id="p-info">
+            A loan note is a type of financial instrument; it is a contract for a loan that specifies when the loan must be repaid and usually also the interest payable.
+             It is similar to a promissory note but the differences can be significant in terms of consequences, especially tax consequences. 
+             Chief of these is that by specifying the interest payable, the lender may obtain a tax shield.
+             Loan notes are simple but important instruments in business and finance. 
+             A loan note can also be conceived of as a form of deferred payment,
+             and in the UK the tax treatment of loan notes is as either ‘qualifying corporate bonds’ (QCBs), which provide a tax shield, or as ‘non-qualifying corporate bonds’ (non-QCBs) Loan notes may contain other provisions such as convertibility into equity or other kinds of debt,
+            in which case they are called "convertible loan notes".
+            The loan note is one of the most widely used instruments in financing the entrepreneurial venture and in start-ups.
+    </p>
+  </div>
+  <div class="loan-application" id="loan-div">
+    <div class="page-ingection">
+      <iframe  src="loan.html"></iframe>
+    </div>
+        
+</div>
+</div>
+
+ <!-- Footer definition -->
+ <footer class="footer-area">
     <div class="col-y-content">
         <div class="footer-single-widget">
             <a href="#"><img width="50px" height="50px" src="../../assets/images/quick_logo.PNG" alt=""></a>
@@ -165,7 +158,8 @@
     <path style="path1" d="M 3 8 L 3 26 L 29 26 L 29 8 Z M 7.3125 10 L 24.6875 10 L 16 15.78125 Z M 5 10.875 L 15.4375 17.84375 L 16 18.1875 L 16.5625 17.84375 L 27 10.875 L 27 24 L 5 24 Z "/>
     </g>
     </defs>
-    </svg>
-    <script type="text/javascript" src="../../js/login.js"></script>
+    </svg> 
+    <script type="text/javascript" src="../../js/loan.js">
+    </script>
 </body>
 </html>
