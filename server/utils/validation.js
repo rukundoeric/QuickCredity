@@ -1,0 +1,23 @@
+import joi from 'joi';
+
+class Validator {
+  constructor() {
+    this.Validate = {
+      loginSchema: joi.object().keys({
+        email: joi.string().email().required(),
+        password: joi.string().regex(/^[a-zA-Z]/).min(8).required(),
+      }),
+      userSchema: joi.object().keys({
+        email: joi.string().email().required(),
+        firstName: joi.string().regex(/^[a-zA-Z]/).min(1).required(),
+        lastName: joi.string().regex(/^[a-zA-Z]/).min(1).required(),
+        password: joi.string().regex(/^[a-zA-Z0-9]/).min(8).required(),
+        userName:joi.string().regex(/^[a-zA-Z0-9]/).min(8).required(),
+        //status:joi.string().regex(/^[a-zA-Z0-9]/).min(3).required(),
+        address: joi.string().regex(/^[a-zA-Z]/).min(3).required(),
+        userRole: joi.string().regex(/^[a-zA-Z]/).min(3).required(),
+      })
+    };
+  }
+}
+export default new Validator();
