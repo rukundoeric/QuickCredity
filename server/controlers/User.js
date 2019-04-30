@@ -79,6 +79,7 @@ class UserControler {
 
   async login(req, res) {
     joi.validate(req.body, Validator.Validate.loginSchema).then(() => {
+      // eslint-disable-next-line consistent-return
       User.getUserByEmail(req.body.email).then((user) => {
         if (!user) {
           return res.status(ST.NOT_FOUND).send({
