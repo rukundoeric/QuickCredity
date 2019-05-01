@@ -308,7 +308,6 @@ table tr {
 table tr:last-child {
   border: 0;
 }
-
 .btns
 {
   width: 200px;
@@ -371,10 +370,7 @@ table tr:last-child {
 }
 .footer-icon.google
 {
-
-
     fill: white;
-
 
 }
 .footer-icon.tumbr{
@@ -382,7 +378,6 @@ table tr:last-child {
 }
 .footer-icon.vk
 {
-
     fill:  white;
 }
   
