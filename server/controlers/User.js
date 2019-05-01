@@ -48,7 +48,6 @@ class UserControler {
                 lastName: req.body.lastName,
                 email: req.body.email,
                 address: req.body.address,
-                userName: req.body.userName,
                 createdOn: new Date(),
                 status: 'unverified',
                 userRole: req.body.userRole,
