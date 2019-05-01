@@ -14,7 +14,7 @@ import auth from '../utils/auth';
 class UserControler {
   async getAllUser(req, res) {
     User.getUserById(req.user.id).then((user) => {
-      if (user.userRole === 'admin') {
+      if (user && user.userRole === 'admin' && user.status === 'verified') {
         User.getAllUsers().then((users) => {
           res.status(200).send({
             status: 200,
@@ -24,7 +24,9 @@ class UserControler {
       } else {
         res.status(ST.BAD_REQUEST).send({
           status: ST.BAD_REQUEST,
-          error: 'Access denied',
+          Message: MSG.MSG_ACCESS_DENIED,
+          error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+          Suggestion: MSG.MSG_USER_SUGGESTION,
         });
       }
     });
@@ -116,7 +118,7 @@ class UserControler {
   async verfyUser(req, res, next) {
     joi.validate(req.body, Validator.Validate.verifySchema).then(() => {
       User.getUserById(req.user.id).then((user) => {
-        if (user.userRole === 'admin' && user.status === 'verified') {
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
           User.getUserByEmail(req.params.email).then((user) => {
             if (!user) {
               return res.status(ST.NOT_FOUND).send({
@@ -132,7 +134,7 @@ class UserControler {
                   users[i].status = req.body.status;
                   res.status(ST.OK).send({
                     status: ST.OK,
-                    Message: 'User is successfully verified',
+                    Message: MSG.MSG_USER_VERIFIED,
                     data: user,
 
                   });

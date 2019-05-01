@@ -14,4 +14,5 @@ export default {
   MSG_ACCESS_DENIED: 'Access denied',
   MSG_UNAUTHORIZED_ADMIN_ERROR: 'May be you are not an admin to this system or you are unverified!',
   MSG_USER_SUGGESTION: 'Please contact the the admin of this system to help you',
+  MSG_USER_VERIFIED: 'User is successfully verified',
 };
