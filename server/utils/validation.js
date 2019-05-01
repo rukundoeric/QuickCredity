@@ -15,7 +15,10 @@ class Validator {
         //status:joi.string().regex(/^[a-zA-Z0-9]/).min(3).required(),
         address: joi.string().regex(/^[a-zA-Z]/).min(3).required(),
         userRole: joi.string().regex(/^[a-zA-Z]/).min(3).required(),
-      })
+      }),
+      verifySchema: joi.object().keys({
+        status: joi.string().regex(/^[a-zA-Z]/).min(3).required(),
+      }),
     };
   }
 }
