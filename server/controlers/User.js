@@ -1,3 +1,6 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-shadow */
 /* eslint-disable class-methods-use-this */
 import joi from 'joi';
 import uuidv4 from 'uuid/v4';
@@ -6,7 +9,7 @@ import Validator from '../utils/validation';
 import ST from '../utils/status';
 import MSG from '../utils/res_messages';
 import auth from '../utils/auth';
-// const user =require('./../models/UserModel');
+
 class UserControler {
   async getAllUser(req, res) {
     User.getUserById(req.user.id).then((user) => {
@@ -108,6 +111,49 @@ class UserControler {
       status: 400,
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
+  }
+
+  async verfyUser(req, res, next) {
+    joi.validate(req.body, Validator.Validate.verifySchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user.userRole === 'admin' && user.status === 'verified') {
+          User.getUserByEmail(req.params.email).then((user) => {
+            if (!user) {
+              return res.status(ST.NOT_FOUND).send({
+                status: ST.NOT_FOUND,
+                error: MSG.MSG_NO_USER_EXIST,
+
+              });
+            }
+            User.getAllUsers().then((users) => {
+              let i;
+              for (i = 0; i < users.length; i++) {
+                if (users[i].email === req.params.email) {
+                  users[i].status = req.body.status;
+                  res.status(ST.OK).send({
+                    status: ST.OK,
+                    Message: 'User is successfully verified',
+                    data: user,
+
+                  });
+                }
+              }
+            });
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+    next();
   }
 }
 
