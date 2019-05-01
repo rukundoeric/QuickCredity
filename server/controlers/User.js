@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable class-methods-use-this */
 import joi from 'joi';
 import uuidv4 from 'uuid/v4';
@@ -6,7 +7,7 @@ import Validator from '../utils/validation';
 import ST from '../utils/status';
 import MSG from '../utils/res_messages';
 import auth from '../utils/auth';
-// const user =require('./../models/UserModel');
+
 class UserControler {
   async getAllUser(req, res) {
     User.getUserById(req.user.id).then((user) => {
@@ -78,6 +79,7 @@ class UserControler {
 
   async login(req, res) {
     joi.validate(req.body, Validator.Validate.loginSchema).then(() => {
+      // eslint-disable-next-line consistent-return
       User.getUserByEmail(req.body.email).then((user) => {
         if (!user) {
           return res.status(ST.NOT_FOUND).send({

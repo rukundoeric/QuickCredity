@@ -40,6 +40,7 @@ class User {
   }
 
   async getUserByName(userName) {
+    // eslint-disable-next-line no-shadow
     const user = this.userData.find(user => user.userName === userName);
     return !user ? null : user.userName;
   }

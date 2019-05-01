@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable class-methods-use-this */
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -33,7 +34,6 @@ class Auth {
         error: error.message,
       });
     }
-
   }
 
   async generateToken(user) {
