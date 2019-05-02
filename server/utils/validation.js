@@ -19,6 +19,11 @@ class Validator {
       verifySchema: joi.object().keys({
         status: joi.string().regex(/^[a-zA-Z]/).min(3).required(),
       }),
+      loanSchema: joi.object().keys({
+        userEmail: joi.string().regex(/^[a-zA-Z]/).required(),
+        tenor: joi.number().required(),
+        amount: joi.number().required(),
+      }),
     };
   }
 }
