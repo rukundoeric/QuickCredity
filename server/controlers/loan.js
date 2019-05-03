@@ -183,8 +183,10 @@ class LoanControler {
                 error: 'No loan found',
               });
             } else {
+              const status1 = (req.body.status === 'approved') ? 'approved' : '';
+              const repaid1 = (req.body.repaid === false) ? false : true;
               for (let i = 0; i < loans.length; i++) {
-                if (loans[i].status === req.body.status && loans[i].repaid === req.body.repaid) {
+                if (loans[i].status === status1 && status1 !== '' && loans[i].repaid === req.body.repaid && repaid1 !== true) {
                   currentLoans = loans[i];
                 }
               }
