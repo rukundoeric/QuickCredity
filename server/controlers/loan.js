@@ -16,9 +16,9 @@ class LoanControler {
   }
 
   async applyForLoan(req, res, next) {
-    User.getUserById(req.user.id).then((user) => {
-      if (user && user.userRole === 'client' && user.status === 'verified') {
-        joi.validate(req.body, Validator.Validate.loanSchema).then(() => {
+    joi.validate(req.body, Validator.Validate.loanSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user && user.userRole === 'client' && user.status === 'verified') {
           Loan.getLoanByUserEmail(req.body.userEmail).then((loan) => {
             if (loan) {
               res.status(ST.BAD_REQUEST).send({
@@ -59,10 +59,31 @@ class LoanControler {
               });
             }
           });
-        }).catch(error => res.send({
-          status: 400,
-          error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
-        }));
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_NOT_CLIENT,
+            UserRole: user.userRole,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
+
+  async getAllLoanApplications(req, res, next) {
+    User.getUserById(req.user.id).then((user) => {
+      if (user && user.userRole === 'admin' && user.status === 'verified') {
+        Loan.viewLoan().then((loans) => {
+          res.status(200).send({
+            status: 200,
+            data: loans,
+          });
+        });
       } else {
         res.status(ST.BAD_REQUEST).send({
           status: ST.BAD_REQUEST,
@@ -74,4 +95,5 @@ class LoanControler {
     });
   }
 }
+
 export default new LoanControler();
