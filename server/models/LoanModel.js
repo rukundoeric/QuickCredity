@@ -50,6 +50,10 @@ class Loan {
   async viewLoan() {
     return this.loanData;
   }
+
+  async getSpecLoan(id) {
+    return this.loanData.find(loan => loan.id === id);
+  }
 }
 
 export default new Loan();
