@@ -3,7 +3,7 @@ class User {
   constructor() {
     this.userData = [
       {
-        id: 1,
+        id: 'klsfks833399aa9o99272jua929njk2',
         firstName: 'Urimubenshi',
         lastName: 'Daniel',
         email: 'benshidanny11@gmail.com',
@@ -14,7 +14,7 @@ class User {
         status: 'Unverified',
       },
       {
-        id: 2,
+        id: 'klsfks8389334iaa9o99272jua90902',
         firstName: 'Dukuze',
         lastName: 'Emmy',
         email: 'dukuze11@gmail.com',
@@ -22,6 +22,17 @@ class User {
         createdOn: '4/28/2019',
         userRole: 'admin',
         password: 'emmy123',
+        status: 'verified',
+      },
+      {
+        id: 'klsfks8389qhkiaa9o99272jua90902',
+        firstName: 'Danny',
+        lastName: 'Kamoso',
+        email: 'dannykamo2023@gmail.com',
+        address: 'Kimironko',
+        createdOn: '4/28/2019',
+        userRole: 'client',
+        password: 'kamoso123',
         status: 'verified',
       },
     ];
