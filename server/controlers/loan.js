@@ -170,6 +170,53 @@ class LoanControler {
     }));
     next();
   }
+
+  async viewCurrentLoans(req, res, next) {
+    joi.validate(req.body, Validator.Validate.repaidLoanSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        let currentLoans = [];
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          Loan.viewLoan().then((loans) => {
+            if (!loans) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'No loan found',
+              });
+            } else {
+              for (let i = 0; i < loans.length; i++) {
+                if (loans[i].status === req.body.status && loans[i].repaid === req.body.repaid) {
+                  currentLoans = loans[i];
+                }
+              }
+              if (currentLoans.length < 1) {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  error: 'No loan found',
+                });
+              } else {
+                res.status(200).send({
+                  Status: 200,
+                  Message: 'Loans found',
+                  Data: currentLoans,
+                });
+              }
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+    next();
+  }
 }
 
 export default new LoanControler();
