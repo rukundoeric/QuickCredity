@@ -4,7 +4,7 @@ class Loan {
       id: 'jksd83w72kjsd0die7728ujdj98e8',
       userEmail: 'benshidanny11@gmail.com',
       status: 'pending',
-      repaid: 'false',
+      repaid: false,
       tanor: 6,
       amount: 1000000,
       paymentInstallment: 20000,
@@ -15,7 +15,7 @@ class Loan {
       id: 'jksd83w72kjsd0909398e8hd89w9',
       userEmail: 'dukuze11@gmail.com',
       status: 'approved',
-      repaid: 'false',
+      repaid: false,
       tanor: 6,
       amount: 1000000,
       paymentInstallment: 20000,
@@ -26,7 +26,7 @@ class Loan {
       id: 'jksd83wrgjsd0909398e8hd8rf',
       userEmail: 'kalisa11@gmail.com',
       status: 'approved',
-      repaid: 'repaid',
+      repaid: true,
       tanor: 5,
       amount: 1000000,
       paymentInstallment: 20000,
@@ -55,5 +55,6 @@ class Loan {
     return this.loanData.find(loan => loan.id === id);
   }
 }
+
 
 export default new Loan();

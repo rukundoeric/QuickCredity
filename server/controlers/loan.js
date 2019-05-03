@@ -1,3 +1,4 @@
+/* eslint-disable no-cond-assign */
 /* eslint-disable class-methods-use-this */
 import joi from 'joi';
 import uuidv4 from 'uuid/v4';
@@ -104,12 +105,13 @@ class LoanControler {
               status: ST.BAD_REQUEST,
               error: 'No loan found with this id',
             });
+          } else {
+            res.status(200).send({
+              Status: 200,
+              Message: 'Loan found',
+              Data: loan,
+            });
           }
-          res.status(200).send({
-            Status: 200,
-            Message: 'Loan found',
-            Data: loan,
-          });
         });
       } else {
         res.status(ST.BAD_REQUEST).send({
@@ -120,6 +122,53 @@ class LoanControler {
         });
       }
     });
+  }
+
+  async viewRepaidLoans(req, res, next) {
+    joi.validate(req.body, Validator.Validate.repaidLoanSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        let repaidLoans = [];
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          Loan.viewLoan().then((loans) => {
+            if (!loans) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'No loan found',
+              });
+            } else {
+              for (let i = 0; i < loans.length; i++) {
+                if (loans[i].status === req.body.status && loans[i].repaid === req.body.repaid) {
+                  repaidLoans = loans[i];
+                }
+              }
+              if (repaidLoans.length < 1) {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  error: 'No loan found',
+                });
+              } else {
+                res.status(200).send({
+                  Status: 200,
+                  Message: 'Loans found',
+                  Data: repaidLoans,
+                });
+              }
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+    next();
   }
 }
 
