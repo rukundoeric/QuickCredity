@@ -42,7 +42,7 @@ class LoanControler {
                 paymentInstallment,
                 balance,
                 interest,
-    
+
               };
               Loan.applyforLoan(loan).then((applied) => {
                 if (!applied) {
@@ -74,5 +74,26 @@ class LoanControler {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
   }
+
+  async getAllLoanApplications(req, res, next) {
+    User.getUserById(req.user.id).then((user) => {
+      if (user && user.userRole === 'admin' && user.status === 'verified') {
+        Loan.viewLoan().then((loans) => {
+          res.status(200).send({
+            status: 200,
+            data: loans,
+          });
+        });
+      } else {
+        res.status(ST.BAD_REQUEST).send({
+          status: ST.BAD_REQUEST,
+          Message: MSG.MSG_ACCESS_DENIED,
+          error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+          Suggestion: MSG.MSG_USER_SUGGESTION,
+        });
+      }
+    });
+  }
 }
+
 export default new LoanControler();

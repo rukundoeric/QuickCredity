@@ -7,5 +7,6 @@ import auth from '../utils/auth';
 const loanRouter = express.Router();
 // ROuters for models(V1)
 loanRouter.post('/api/v1/loans/apply', auth.verifyToken, LoanControler.applyForLoan);
+loanRouter.get('/api/v1/loans', auth.verifyToken, LoanControler.getAllLoanApplications);
 
 export default loanRouter;

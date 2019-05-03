@@ -9,6 +9,7 @@ class Loan {
       amount: 1000000,
       paymentInstallment: 20000,
       balance: 1000000,
+      interest: 200000,
     },
     {
       id: 'jksd83w72kjsd0909398e8hd89w9',
@@ -19,6 +20,7 @@ class Loan {
       amount: 1000000,
       paymentInstallment: 20000,
       balance: 100000,
+      interest: 200000,
     },
     {
       id: 'jksd83wrgjsd0909398e8hd8rf',
@@ -29,6 +31,7 @@ class Loan {
       amount: 1000000,
       paymentInstallment: 20000,
       balance: 0,
+      interest: 200000,
     }];
   }
 
@@ -43,7 +46,10 @@ class Loan {
   async getLoanByUserEmail(email) {
     return this.loanData.find(loan => loan.userEmail === email);
   }
-}
 
+  async viewLoan() {
+    return this.loanData;
+  }
+}
 
 export default new Loan();

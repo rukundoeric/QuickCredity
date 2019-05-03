@@ -5,7 +5,7 @@ class Validator {
     this.Validate = {
       loginSchema: joi.object().keys({
         email: joi.string().email().required(),
-        password: joi.string().regex(/^[a-zA-Z]/).min(8).required(),
+        password: joi.string().regex(/^[a-zA-Z]/).min(7).required(),
       }),
       userSchema: joi.object().keys({
         email: joi.string().email().required(),
