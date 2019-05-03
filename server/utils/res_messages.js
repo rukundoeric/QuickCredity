@@ -18,5 +18,5 @@ export default {
   MSG_LOAN_MUST_BE_ONE_AT_TIME: 'You cant apply for more than one loan at same time, please first make repayment',
   MSG_LOAN_APPLIED_SUCCESSFULLY: 'You have applied for loan successfully, checkout your email we will inform you if it is approved or rejected',
   MSG_LOAN_NOT_APPLIED: 'Invalid loan application',
-  MSG_NOT_CLIENT: 'You are not a client to this system, please first create account ',
+  MSG_NOT_CLIENT: 'You are not a client to this system or unverified, please first create account or contact the admin to help you ',
 };
