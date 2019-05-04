@@ -35,6 +35,7 @@ class Loan {
     }];
     this.repaymentHistory = [
       {
+        id: 'jd99e8ud89jeje99e900e099e0',
         loanId: 'jksd83w72kjsd0die7728ujdj98e8',
         userEmail: 'benshidanny11@gmail.com',
         createdOn: '4/5/2019',
@@ -43,6 +44,7 @@ class Loan {
         paidAmount: 200000,
       },
       {
+        id: 'jd99e2ud89jeje99iy60e099e0',
         loanId: 'jksd83wrgjsd0909398e8hd8rf',
         userEmail: 'dannykamo2023@gmail.com',
         createdOn: '4/5/2019',
@@ -74,6 +76,15 @@ class Loan {
 
   async viewRepaymentHistory() {
     return this.repaymentHistory;
+  }
+
+  async postRepayHistory(loanRepayment) {
+    if (!loanRepayment) {
+      return false;
+    }
+
+    this.repaymentHistory.push(loanRepayment);
+    return true;
   }
 }
 
