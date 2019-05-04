@@ -343,7 +343,12 @@ class LoanControler {
             let loanRepaymentHistory = null;
             for (i = 0; i < history.length; i++) {
               if (history[i].loanId === req.params.id && history[i].userEmail === user.email) {
-                loanRepaymentHistory = history[i];
+                loanRepaymentHistory = {
+                  LoanId: history[i].loanId,
+                  createdOn: history[i].createdOn,
+                  monthlyIntallment: history[i].monthlyInstallment,
+                  Amount: history[i].paidAmount,
+                };
               }
             }
             if (loanRepaymentHistory !== null) {
