@@ -26,7 +26,7 @@ class Loan {
       id: 'jksd83wrgjsd0909398e8hd8rf',
       userEmail: 'dannykamo2023@gmail.com',
       status: 'approved',
-      repaid: true,
+      repaid: false,
       tanor: 5,
       amount: 1000000,
       paymentInstallment: 20000,
@@ -74,6 +74,14 @@ class Loan {
 
   async viewRepaymentHistory() {
     return this.repaymentHistory;
+  }
+
+  async postRepayHistory(repHistory) {
+    if (!repHistory) {
+      return false;
+    }
+    this.repaymentHistory.push(repHistory);
+    return true;
   }
 }
 

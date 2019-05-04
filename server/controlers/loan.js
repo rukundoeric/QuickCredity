@@ -376,6 +376,76 @@ class LoanControler {
       }
     });
   }
+
+  async postRepayHistory(req, res) {
+    joi.validate(req.body, Validator.Validate.postRepaymentScema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          User.getUserByEmail(req.body.userEmail).then((user) => {
+            if (!user) {
+              res.send({
+                Status: ST.NOT_FOUND,
+                Error: `No client found with the email ${req.body.userEmail} `,
+              });
+            } else if (user.userRole === 'client') {
+              Loan.getSpecLoan(req.body.loanId).then((loan) => {
+                if (!loan) {
+                  res.send({
+                    Status: ST.NOT_FOUND,
+                    Error: 'May be loan is not found, not approved or is fully repaid',
+                  });
+                } else if (loan.status === 'approved' && loan.repaid === false) {
+                  const loanRepay = {
+                    Id: uuidv4(),
+                    loanId: loan.id,
+                    UserEmail: req.body.userEmail,
+                    createdOn: new Date(),
+                    paymentInstallment: loan.paymentInstallment,
+                    paidAmount: req.body.paidAmount,
+                  };
+                  Loan.postRepayHistory(loanRepay).then((historyposted) => {
+                    if (historyposted) {
+                      res.status(ST.OK).send({
+                        Status: ST.OK,
+                        Message: 'Repaymet posted successfully',
+                        Data: loanRepay,
+                      });
+                    } else {
+                      res.send({
+                        Status: ST.BAD_REQUEST,
+                        Error: 'Repayment not posted, try again later!',
+                      });
+                    }
+                  });
+                } else {
+                  res.send({
+                    Status: ST.BAD_REQUEST,
+                    Error: 'No client found!',
+                  });
+                }
+              });
+            } else {
+              res.send({
+                Status: ST.BAD_REQUEST,
+                Error: `No client found! with email ${req.body.userEmail}`,
+              });
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+            UserRole: user.userRole,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
 }
 
 export default new LoanControler();
