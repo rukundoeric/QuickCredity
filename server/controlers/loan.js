@@ -328,6 +328,49 @@ class LoanControler {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
   }
+
+  async viewRepHistory(req, res) {
+    User.getUserById(req.user.id).then((user) => {
+      if (user && user.userRole === 'client' && user.status === 'verified') {
+        Loan.viewRepaymentHistory().then((history) => {
+          if (!history) {
+            res.status(ST.BAD_REQUEST).send({
+              status: ST.BAD_REQUEST,
+              error: 'No repayment history!',
+            });
+          } else {
+            let i;
+            let loanRepaymentHistory = null;
+            for (i = 0; i < history.length; i++) {
+              if (history[i].loanId === req.params.id && history[i].userEmail === user.email) {
+                loanRepaymentHistory = history[i];
+              }
+            }
+            if (loanRepaymentHistory !== null) {
+              res.status(ST.OK).send({
+                status: ST.OK,
+                MEssage: 'History found',
+                Data: loanRepaymentHistory,
+              });
+            } else {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                Error: 'No repayment history in your favor',
+              });
+            }
+          }
+        });
+      } else {
+        res.status(ST.BAD_REQUEST).send({
+          status: ST.BAD_REQUEST,
+          Message: MSG.MSG_ACCESS_DENIED,
+          error: MSG.MSG_NOT_CLIENT,
+          UserRole: user.userRole,
+          Suggestion: MSG.MSG_USER_SUGGESTION,
+        });
+      }
+    });
+  }
 }
 
 export default new LoanControler();

@@ -12,4 +12,5 @@ loanRouter.get('/api/v1/loans/repaid', auth.verifyToken, LoanControler.viewRepai
 loanRouter.get('/api/v1/loans/current', auth.verifyToken, LoanControler.viewCurrentLoans);
 loanRouter.patch('/api/v1/loans/approveorreject/:id', auth.verifyToken, LoanControler.approveOrReject);
 loanRouter.post('/api/v1/loans/:id/repayment', auth.verifyToken, LoanControler.repayLoan);
+loanRouter.get('/api/v1/loans/:id/repayments', auth.verifyToken, LoanControler.viewRepHistory);
 export default loanRouter;
