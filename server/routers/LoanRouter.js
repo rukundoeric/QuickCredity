@@ -11,5 +11,5 @@ loanRouter.get('/api/v1/loans', auth.verifyToken, LoanControler.getAllLoanApplic
 // loanRouter.get('/api/v1/loans/:id', auth.verifyToken, LoanControler.getSpecLoan);
 loanRouter.get('/api/v1/loans/repaid', auth.verifyToken, LoanControler.viewRepaidLoans);
 loanRouter.get('/api/v1/loans/current', auth.verifyToken, LoanControler.viewCurrentLoans);
-
+loanRouter.patch('/api/v1/loans/approveorreject/:id', auth.verifyToken, LoanControler.approveOrReject);
 export default loanRouter;

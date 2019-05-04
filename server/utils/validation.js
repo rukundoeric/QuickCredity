@@ -28,6 +28,9 @@ class Validator {
         status: joi.string().regex(/^[a-zA-Z]/).min(6).required(),
         repaid: joi.boolean().required(),
       }),
+      approveOrRejectSchema: joi.object().keys({
+        status: joi.string().regex(/^[a-zA-Z]/).min(6).required(),
+      }),
     };
   }
 }

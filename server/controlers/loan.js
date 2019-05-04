@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-cond-assign */
 /* eslint-disable class-methods-use-this */
 import joi from 'joi';
@@ -184,7 +185,7 @@ class LoanControler {
               });
             } else {
               const status1 = (req.body.status === 'approved') ? 'approved' : '';
-              const repaid1 = (req.body.repaid === false) ? false : true;
+              const repaid1 = req.body.repaid !== false;
               for (let i = 0; i < loans.length; i++) {
                 if (loans[i].status === status1 && status1 !== '' && loans[i].repaid === req.body.repaid && repaid1 !== true) {
                   currentLoans = loans[i];
@@ -218,6 +219,61 @@ class LoanControler {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
     next();
+  }
+
+  async approveOrReject(req, res) {
+    joi.validate(req.body, Validator.Validate.approveOrRejectSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          Loan.viewLoan().then((loans) => {
+            if (!loans) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'No loan found',
+              });
+            } else {
+              let i;
+              const loanStatus = req.body.status;
+              if (loanStatus === 'rejected') {
+              // Send rejected email to the client
+              } else {
+                // //Send approve email to the client
+              }
+              let newLoan = null;
+              for (i = 0; i < loans.length; i++) {
+                if (loans[i].id === req.params.id && loans[i].status === 'pending') {
+                  loans[i].status = loanStatus;
+                  newLoan = loans[i];
+                }
+              }
+              if (newLoan === null) {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  error: 'No pending loan found for provided id',
+                });
+              } else {
+                res.status(ST.OK).send({
+                  Status: ST.OK,
+                  Message: `Loan is ${loanStatus} Successfully`,
+                  Data: newLoan,
+                });
+              }
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_NOT_CLIENT,
+            UserRole: user.userRole,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
   }
 }
 
