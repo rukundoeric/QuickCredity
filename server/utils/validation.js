@@ -31,6 +31,9 @@ class Validator {
       approveOrRejectSchema: joi.object().keys({
         status: joi.string().regex(/^[a-zA-Z]/).min(6).required(),
       }),
+      repayLoanSchema: joi.object().keys({
+        paidAmount: joi.number().required(),
+      }),
     };
   }
 }

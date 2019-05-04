@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-cond-assign */
 /* eslint-disable class-methods-use-this */
@@ -10,7 +11,8 @@ import MSG from '../utils/res_messages';
 import Loan from '../models/LoanModel';
 import User from '../models/UserModel';
 
-const loanRepayment = 0;
+let paidAm = 0;
+let balance = 0;
 
 class LoanControler {
   constructor() {
@@ -30,7 +32,7 @@ class LoanControler {
             } else {
               const { amount } = req.body;
               const { tenor } = req.body;
-              const balance = amount - loanRepayment;
+              balance = amount - paidAm;
               const interest = (amount * 5) / 100;
               const paymentInstallment = (amount + interest) / tenor;
               const loan = {
@@ -258,6 +260,57 @@ class LoanControler {
                   Data: newLoan,
                 });
               }
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_NOT_CLIENT,
+            UserRole: user.userRole,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
+
+  async repayLoan(req, res) {
+    joi.validate(req.body, Validator.Validate.repayLoanSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user && user.userRole === 'client' && user.status === 'verified') {
+          Loan.getSpecLoan(req.params.id).then((loan) => {
+            if (!loan) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'No loan found for provided id',
+              });
+            } else if (loan.status === 'approved' && loan.repaid === false) {
+              const { paidAmount } = req.body;
+              paidAm = paidAmount;
+              balance = loan.amount - paidAm;
+              const loanRepayment = {
+                id: uuidv4(),
+                loanId: loan.id,
+                createdOn: new Date(),
+                Amount: loan.amount,
+                monthlyIntallment: loan.paymentInstallment,
+                paidAmount: paidAm,
+                Balance: balance,
+              };
+              res.status(ST.OK).send({
+                status: ST.OK,
+                MEssage: `You have successfully paid a loan with id: ${loan.id}`,
+                Data: loanRepayment,
+              });
+            } else {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                Error: 'May be your loan is not approved or fully paid',
+              });
             }
           });
         } else {
