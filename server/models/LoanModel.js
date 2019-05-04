@@ -24,7 +24,7 @@ class Loan {
     },
     {
       id: 'jksd83wrgjsd0909398e8hd8rf',
-      userEmail: 'kalisa11@gmail.com',
+      userEmail: 'dannykamo2023@gmail.com',
       status: 'approved',
       repaid: true,
       tanor: 5,

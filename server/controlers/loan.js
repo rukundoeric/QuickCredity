@@ -282,34 +282,48 @@ class LoanControler {
     joi.validate(req.body, Validator.Validate.repayLoanSchema).then(() => {
       User.getUserById(req.user.id).then((user) => {
         if (user && user.userRole === 'client' && user.status === 'verified') {
-          Loan.getSpecLoan(req.params.id).then((loan) => {
+          Loan.getLoanByUserEmail(user.email).then((loan) => {
             if (!loan) {
               res.status(ST.BAD_REQUEST).send({
                 status: ST.BAD_REQUEST,
-                error: 'No loan found for provided id',
+                error: 'You dont have a loan in loan list',
               });
-            } else if (loan.status === 'approved' && loan.repaid === false) {
-              const { paidAmount } = req.body;
-              paidAm = paidAmount;
-              balance = loan.amount - paidAm;
-              const loanRepayment = {
-                id: uuidv4(),
-                loanId: loan.id,
-                createdOn: new Date(),
-                Amount: loan.amount,
-                monthlyIntallment: loan.paymentInstallment,
-                paidAmount: paidAm,
-                Balance: balance,
-              };
-              res.status(ST.OK).send({
-                status: ST.OK,
-                MEssage: `You have successfully paid a loan with id: ${loan.id}`,
-                Data: loanRepayment,
+            } else if (loan.userEmail === user.email) {
+              Loan.getSpecLoan(req.params.id).then((loan) => {
+                if (!loan) {
+                  res.status(ST.BAD_REQUEST).send({
+                    status: ST.BAD_REQUEST,
+                    error: 'No loan found for provided id',
+                  });
+                } else if (loan.status === 'approved' && loan.repaid === false) {
+                  const { paidAmount } = req.body;
+                  paidAm = paidAmount;
+                  balance = loan.amount - paidAm;
+                  const loanRepayment = {
+                    id: uuidv4(),
+                    loanId: loan.id,
+                    createdOn: new Date(),
+                    Amount: loan.amount,
+                    monthlyIntallment: loan.paymentInstallment,
+                    paidAmount: paidAm,
+                    Balance: balance,
+                  };
+                  res.status(ST.OK).send({
+                    status: ST.OK,
+                    MEssage: `You have successfully paid a loan with id: ${loan.id}`,
+                    Data: loanRepayment,
+                  });
+                } else {
+                  res.status(ST.BAD_REQUEST).send({
+                    status: ST.BAD_REQUEST,
+                    Error: 'May be your loan is not approved or is fully paid',
+                  });
+                }
               });
             } else {
               res.status(ST.BAD_REQUEST).send({
                 status: ST.BAD_REQUEST,
-                Error: 'May be your loan is not approved or fully paid',
+                Error: 'This loan belongs to other client!',
               });
             }
           });
