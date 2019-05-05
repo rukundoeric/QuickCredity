@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-cond-assign */
@@ -5,6 +6,7 @@
 import joi from 'joi';
 import uuidv4 from 'uuid/v4';
 import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
 import Validator from '../utils/validation';
 import ST from '../utils/status';
 import MSG from '../utils/res_messages';
@@ -236,11 +238,19 @@ class LoanControler {
             } else {
               let i;
               const loanStatus = req.body.status;
-              if (loanStatus === 'rejected') {
-              // Send rejected email to the client
-              } else {
-                // //Send approve email to the client
-              }
+              const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                secure: false,
+                port: 25,
+                auth: {
+                  user: process.env.QUICK_CREDIT_EMAIL,
+                  pass: process.env.QUICK_PASSWORD,
+                },
+                tls: { rejectUnauthorized: false },
+              });
+
+              let mailOptions = null;
+
               let newLoan = null;
               for (i = 0; i < loans.length; i++) {
                 if (loans[i].id === req.params.id && loans[i].status === 'pending') {
@@ -258,7 +268,45 @@ class LoanControler {
                   Status: ST.OK,
                   Message: `Loan is ${loanStatus} Successfully`,
                   Data: newLoan,
+                  Quickemail: process.env.QUICK_CREDIT_EMAIL,
+                  QuickPassword: process.env.QUICK_PASSWORD,
                 });
+                const output = `<html>
+                <body>
+                <h3 style={color:blue}>Hello Quick credit user</h3>
+                <p> We are informing you that your loan application is ${loanStatus}.</p>
+                </body>
+                </html>`;
+                if (loanStatus === 'approved') {
+                  mailOptions = {
+                    from: 'Quick credit',
+                    to: newLoan.userEmail,
+                    subject: 'Quick credit loan application approving',
+                    html: output,
+                  };
+
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log(`Email sent: ${info.response}`);
+                    }
+                  });
+                } else {
+                  mailOptions = {
+                    from: process.env.QUICK_CREDIT_EMAIL,
+                    to: newLoan.userEmail,
+                    subject: 'Quick credit loan application rejection',
+                    html: output,
+                  };
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log(`Email sent: ${info.response}`);
+                    }
+                  });
+                }
               }
             }
           });
