@@ -157,6 +157,47 @@ class UserControler {
     }));
     next();
   }
+
+  async resetPassword(req, res, next) {
+    joi.validate(req.body, Validator.Validate.resetPassSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (!user) {
+          res.status(ST.NOT_FOUND).send({
+            status: ST.NOT_FOUND,
+            error: 'No user found!',
+          });
+        }
+        const oldPass = req.body.oldPassword;
+        const newPass = req.body.newPassword;
+        const confirmPass = req.body.confirmPassword;
+        if (newPass === confirmPass) {
+          if (oldPass === user.password) {
+            user.password = newPass;
+            res.status(ST.OK).send({
+              status: ST.OK,
+              Data: {
+                Message: 'Password reset successfully',
+                user,
+              },
+            });
+          } else {
+            res.status(ST.BAD_REQUEST).send({
+              status: ST.BAD_REQUEST,
+              error: 'Password mismatch!',
+            });
+          }
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            error: 'Password mismatch!',
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
 }
 
 export default new UserControler();
