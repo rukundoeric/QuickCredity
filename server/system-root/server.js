@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParcer from 'body-parser';
 import User from '../routers/UserRouter';
 import UserMessage from '../routers/WelcomeRouter';
-import loanRouter from './../routers/LoanRouter';
+import loanRouter from '../routers/LoanRouter';
 // const express =require('express');
 // const User=require('./../routers/UserRouter');
 

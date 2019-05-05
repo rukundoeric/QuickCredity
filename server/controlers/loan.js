@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-cond-assign */
 /* eslint-disable class-methods-use-this */
 import joi from 'joi';
 import uuidv4 from 'uuid/v4';
@@ -8,7 +11,8 @@ import MSG from '../utils/res_messages';
 import Loan from '../models/LoanModel';
 import User from '../models/UserModel';
 
-const loanRepayment = 0;
+let paidAm = 0;
+let balance = 0;
 
 class LoanControler {
   constructor() {
@@ -28,7 +32,7 @@ class LoanControler {
             } else {
               const { amount } = req.body;
               const { tenor } = req.body;
-              const balance = amount - loanRepayment;
+              balance = amount - paidAm;
               const interest = (amount * 5) / 100;
               const paymentInstallment = (amount + interest) / tenor;
               const loan = {
@@ -104,12 +108,13 @@ class LoanControler {
               status: ST.BAD_REQUEST,
               error: 'No loan found with this id',
             });
+          } else {
+            res.status(200).send({
+              Status: 200,
+              Message: 'Loan found',
+              Data: loan,
+            });
           }
-          res.status(200).send({
-            Status: 200,
-            Message: 'Loan found',
-            Data: loan,
-          });
         });
       } else {
         res.status(ST.BAD_REQUEST).send({
@@ -120,6 +125,222 @@ class LoanControler {
         });
       }
     });
+  }
+
+  async viewRepaidLoans(req, res, next) {
+    joi.validate(req.body, Validator.Validate.repaidLoanSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        let repaidLoans = [];
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          Loan.viewLoan().then((loans) => {
+            if (!loans) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'No loan found',
+              });
+            } else {
+              for (let i = 0; i < loans.length; i++) {
+                if (loans[i].status === req.body.status && loans[i].repaid === req.body.repaid) {
+                  repaidLoans = loans[i];
+                }
+              }
+              if (repaidLoans.length < 1) {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  error: 'No loan found',
+                });
+              } else {
+                res.status(200).send({
+                  Status: 200,
+                  Message: 'Loans found',
+                  Data: repaidLoans,
+                });
+              }
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+    next();
+  }
+
+  async viewCurrentLoans(req, res, next) {
+    joi.validate(req.body, Validator.Validate.repaidLoanSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        let currentLoans = [];
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          Loan.viewLoan().then((loans) => {
+            if (!loans) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'No loan found',
+              });
+            } else {
+              const status1 = (req.body.status === 'approved') ? 'approved' : '';
+              const repaid1 = req.body.repaid !== false;
+              for (let i = 0; i < loans.length; i++) {
+                if (loans[i].status === status1 && status1 !== '' && loans[i].repaid === req.body.repaid && repaid1 !== true) {
+                  currentLoans = loans[i];
+                }
+              }
+              if (currentLoans.length < 1) {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  error: 'No loan found',
+                });
+              } else {
+                res.status(200).send({
+                  Status: 200,
+                  Message: 'Loans found',
+                  Data: currentLoans,
+                });
+              }
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+    next();
+  }
+
+  async approveOrReject(req, res) {
+    joi.validate(req.body, Validator.Validate.approveOrRejectSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          Loan.viewLoan().then((loans) => {
+            if (!loans) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'No loan found',
+              });
+            } else {
+              let i;
+              const loanStatus = req.body.status;
+              if (loanStatus === 'rejected') {
+              // Send rejected email to the client
+              } else {
+                // //Send approve email to the client
+              }
+              let newLoan = null;
+              for (i = 0; i < loans.length; i++) {
+                if (loans[i].id === req.params.id && loans[i].status === 'pending') {
+                  loans[i].status = loanStatus;
+                  newLoan = loans[i];
+                }
+              }
+              if (newLoan === null) {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  error: 'No pending loan found for provided id',
+                });
+              } else {
+                res.status(ST.OK).send({
+                  Status: ST.OK,
+                  Message: `Loan is ${loanStatus} Successfully`,
+                  Data: newLoan,
+                });
+              }
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_NOT_CLIENT,
+            UserRole: user.userRole,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
+
+  async repayLoan(req, res) {
+    joi.validate(req.body, Validator.Validate.repayLoanSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user && user.userRole === 'client' && user.status === 'verified') {
+          Loan.getLoanByUserEmail(user.email).then((loan) => {
+            if (!loan) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: 'You dont have a loan in loan list',
+              });
+            } else if (loan.userEmail === user.email) {
+              Loan.getSpecLoan(req.params.id).then((loan) => {
+                if (!loan) {
+                  res.status(ST.BAD_REQUEST).send({
+                    status: ST.BAD_REQUEST,
+                    error: 'No loan found for provided id',
+                  });
+                } else if (loan.status === 'approved' && loan.repaid === false) {
+                  const { paidAmount } = req.body;
+                  paidAm = paidAmount;
+                  balance = loan.amount - paidAm;
+                  const loanRepayment = {
+                    id: uuidv4(),
+                    loanId: loan.id,
+                    createdOn: new Date(),
+                    Amount: loan.amount,
+                    monthlyIntallment: loan.paymentInstallment,
+                    paidAmount: paidAm,
+                    Balance: balance,
+                  };
+                  res.status(ST.OK).send({
+                    status: ST.OK,
+                    MEssage: `You have successfully paid a loan with id: ${loan.id}`,
+                    Data: loanRepayment,
+                  });
+                } else {
+                  res.status(ST.BAD_REQUEST).send({
+                    status: ST.BAD_REQUEST,
+                    Error: 'May be your loan is not approved or is fully paid',
+                  });
+                }
+              });
+            } else {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                Error: 'This loan belongs to other client!',
+              });
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_NOT_CLIENT,
+            UserRole: user.userRole,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
   }
 }
 

@@ -8,6 +8,8 @@ const loanRouter = express.Router();
 // ROuters for models(V1)
 loanRouter.post('/api/v1/loans/apply', auth.verifyToken, LoanControler.applyForLoan);
 loanRouter.get('/api/v1/loans', auth.verifyToken, LoanControler.getAllLoanApplications);
-loanRouter.get('/api/v1/loans/:id', auth.verifyToken, LoanControler.getSpecLoan);
-
+loanRouter.get('/api/v1/loans/repaid', auth.verifyToken, LoanControler.viewRepaidLoans);
+loanRouter.get('/api/v1/loans/current', auth.verifyToken, LoanControler.viewCurrentLoans);
+loanRouter.patch('/api/v1/loans/approveorreject/:id', auth.verifyToken, LoanControler.approveOrReject);
+loanRouter.post('/api/v1/loans/:id/repayment', auth.verifyToken, LoanControler.repayLoan);
 export default loanRouter;
