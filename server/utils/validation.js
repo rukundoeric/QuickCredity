@@ -34,6 +34,11 @@ class Validator {
       repayLoanSchema: joi.object().keys({
         paidAmount: joi.number().required(),
       }),
+      postRepaymentScema: joi.object().keys({
+        loanId: joi.string().regex(/^[a-zA-Z]/).min(5).required(),
+        userEmail: joi.string().regex(/^[a-zA-Z]/).min(5).required(),
+        paidAmount: joi.number().required(),
+      }),
     };
   }
 }

@@ -53,6 +53,7 @@
     "express": "^4.16.4",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.1.1",
     "uuid": "^3.3.2"
   }
 }

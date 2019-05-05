@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-shadow */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-cond-assign */
@@ -5,6 +6,7 @@
 import joi from 'joi';
 import uuidv4 from 'uuid/v4';
 import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
 import Validator from '../utils/validation';
 import ST from '../utils/status';
 import MSG from '../utils/res_messages';
@@ -236,11 +238,19 @@ class LoanControler {
             } else {
               let i;
               const loanStatus = req.body.status;
-              if (loanStatus === 'rejected') {
-              // Send rejected email to the client
-              } else {
-                // //Send approve email to the client
-              }
+              const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                secure: false,
+                port: 25,
+                auth: {
+                  user: process.env.QUICK_CREDIT_EMAIL,
+                  pass: process.env.QUICK_PASSWORD,
+                },
+                tls: { rejectUnauthorized: false },
+              });
+
+              let mailOptions = null;
+
               let newLoan = null;
               for (i = 0; i < loans.length; i++) {
                 if (loans[i].id === req.params.id && loans[i].status === 'pending') {
@@ -258,7 +268,45 @@ class LoanControler {
                   Status: ST.OK,
                   Message: `Loan is ${loanStatus} Successfully`,
                   Data: newLoan,
+                  Quickemail: process.env.QUICK_CREDIT_EMAIL,
+                  QuickPassword: process.env.QUICK_PASSWORD,
                 });
+                const output = `<html>
+                <body>
+                <h3 style={color:blue}>Hello Quick credit user</h3>
+                <p> We are informing you that your loan application is ${loanStatus}.</p>
+                </body>
+                </html>`;
+                if (loanStatus === 'approved') {
+                  mailOptions = {
+                    from: 'Quick credit',
+                    to: newLoan.userEmail,
+                    subject: 'Quick credit loan application approving',
+                    html: output,
+                  };
+
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log(`Email sent: ${info.response}`);
+                    }
+                  });
+                } else {
+                  mailOptions = {
+                    from: process.env.QUICK_CREDIT_EMAIL,
+                    to: newLoan.userEmail,
+                    subject: 'Quick credit loan application rejection',
+                    html: output,
+                  };
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log(`Email sent: ${info.response}`);
+                    }
+                  });
+                }
               }
             }
           });
@@ -332,6 +380,124 @@ class LoanControler {
             status: ST.BAD_REQUEST,
             Message: MSG.MSG_ACCESS_DENIED,
             error: MSG.MSG_NOT_CLIENT,
+            UserRole: user.userRole,
+            Suggestion: MSG.MSG_USER_SUGGESTION,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
+
+  async viewRepHistory(req, res) {
+    User.getUserById(req.user.id).then((user) => {
+      if (user && user.userRole === 'client' && user.status === 'verified') {
+        Loan.viewRepaymentHistory().then((history) => {
+          if (!history) {
+            res.status(ST.BAD_REQUEST).send({
+              status: ST.BAD_REQUEST,
+              error: 'No repayment history!',
+            });
+          } else {
+            let i;
+            let loanRepaymentHistory = null;
+            for (i = 0; i < history.length; i++) {
+              if (history[i].loanId === req.params.id && history[i].userEmail === user.email) {
+                loanRepaymentHistory = {
+                  LoanId: history[i].loanId,
+                  createdOn: history[i].createdOn,
+                  monthlyIntallment: history[i].monthlyInstallment,
+                  Amount: history[i].paidAmount,
+                };
+              }
+            }
+            if (loanRepaymentHistory !== null) {
+              res.status(ST.OK).send({
+                status: ST.OK,
+                MEssage: 'History found',
+                Data: loanRepaymentHistory,
+              });
+            } else {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                Error: 'No repayment history in your favor',
+              });
+            }
+          }
+        });
+      } else {
+        res.status(ST.BAD_REQUEST).send({
+          status: ST.BAD_REQUEST,
+          Message: MSG.MSG_ACCESS_DENIED,
+          error: MSG.MSG_NOT_CLIENT,
+          UserRole: user.userRole,
+          Suggestion: MSG.MSG_USER_SUGGESTION,
+        });
+      }
+    });
+  }
+
+  async postRepayHistory(req, res) {
+    joi.validate(req.body, Validator.Validate.postRepaymentScema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        if (user && user.userRole === 'admin' && user.status === 'verified') {
+          User.getUserByEmail(req.body.userEmail).then((user) => {
+            if (!user) {
+              res.send({
+                Status: ST.NOT_FOUND,
+                Error: `No client found with the email ${req.body.userEmail} `,
+              });
+            } else if (user.userRole === 'client') {
+              Loan.getSpecLoan(req.body.loanId).then((loan) => {
+                if (!loan) {
+                  res.send({
+                    Status: ST.NOT_FOUND,
+                    Error: 'May be loan is not found, not approved or is fully repaid',
+                  });
+                } else if (loan.status === 'approved' && loan.repaid === false) {
+                  const loanRepay = {
+                    Id: uuidv4(),
+                    loanId: loan.id,
+                    UserEmail: req.body.userEmail,
+                    createdOn: new Date(),
+                    paymentInstallment: loan.paymentInstallment,
+                    paidAmount: req.body.paidAmount,
+                  };
+                  Loan.postRepayHistory(loanRepay).then((historyposted) => {
+                    if (historyposted) {
+                      res.status(ST.OK).send({
+                        Status: ST.OK,
+                        Message: 'Repaymet posted successfully',
+                        Data: loanRepay,
+                      });
+                    } else {
+                      res.send({
+                        Status: ST.BAD_REQUEST,
+                        Error: 'Repayment not posted, try again later!',
+                      });
+                    }
+                  });
+                } else {
+                  res.send({
+                    Status: ST.BAD_REQUEST,
+                    Error: 'No client found!',
+                  });
+                }
+              });
+            } else {
+              res.send({
+                Status: ST.BAD_REQUEST,
+                Error: `No client found! with email ${req.body.userEmail}`,
+              });
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            Message: MSG.MSG_ACCESS_DENIED,
+            error: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
             UserRole: user.userRole,
             Suggestion: MSG.MSG_USER_SUGGESTION,
           });
