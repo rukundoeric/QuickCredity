@@ -3,7 +3,7 @@ env:
   global:
     - PORT=7070
     - NODE_ENV=development
-    - JWT_SECRET=ericrukundo005@gmail.com130852
+    - JWT_SECRET=DannyPro
 language: node_js
 node_js:
   - "10.15.1"
