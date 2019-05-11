@@ -1,3 +1,4 @@
+/* eslint-disable no-else-return */
 
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-restricted-syntax */
@@ -15,11 +16,14 @@ import auth from '../utils/auth';
 class UserControler {
   async getAllUser(req, res) {
     User.getUserById(req.user.id).then((user) => {
-      if (user && user.userRole === 'admin' && user.status === 'verified') {
+      if (user.userRole === 'admin' && user.status === 'verified') {
         User.getAllUsers().then((users) => {
           res.status(200).send({
+            ID: req.user.id,
             status: 200,
-            data: users,
+            data: {
+              USers: users,
+            },
           });
         });
       } else {
@@ -42,41 +46,32 @@ class UserControler {
             error: MSG.MSG_USER_ALREAD_EXIST,
           });
         } else {
-          User.getUserByName(req.body.userName).then((user) => {
-            if (user) {
-              res.status(ST.BAD_REQUEST).send({
-                status: ST.BAD_REQUEST,
-                error: MSG.MSG_USER_ALREAD_EXIST,
+          const user = {
+            id: uuidv4(),
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            address: req.body.address,
+            createdOn: new Date(),
+            status: 'verified',
+            userRole: req.body.userRole,
+            password: req.body.password,
+          };
+          User.signup(user).then(() => {
+            auth.generateToken(user).then((token) => {
+              res.status(ST.CREATED).send({
+                status: ST.CREATED,
+                Token: token,
+                Data: {
+                  message: MSG.MSG_SIGNUP_SUCCESSFFUL,
+                  User: user,
+                },
               });
-            } else {
-              const user = {
-                id: uuidv4(),
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                address: req.body.address,
-                createdOn: new Date(),
-                status: 'unverified',
-                userRole: req.body.userRole,
-                password: req.body.password,
-              };
-              User.signup(user).then(() => {
-                auth.generateToken(user).then((token) => {
-                  res.status(ST.CREATED).send({
-                    status: ST.CREATED,
-                    data: {
-                      token,
-                      message: MSG.MSG_SIGNUP_SUCCESSFFUL,
-                      user,
-                    },
-                  });
-                });
-              });
-            }
+            });
           });
         }
       });
-    }).catch(error => res.send({
+    }).catch(error => res.status(400).send({
       status: 400,
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
@@ -96,11 +91,11 @@ class UserControler {
         }
         if (user.password === req.body.password) {
           auth.generateToken(user).then(token => res.status(ST.OK).send({
-            status: ST.OK,
-            data: {
-              token,
-              message: 'Loggedin successfully',
-              user,
+            status: ST.CREATED,
+            Token: token,
+            message: 'Loggedin successfully',
+            Data: {
+              User: user,
             },
           }));
         } else {
@@ -119,29 +114,31 @@ class UserControler {
   async verfyUser(req, res, next) {
     joi.validate(req.body, Validator.Validate.verifySchema).then(() => {
       User.getUserById(req.user.id).then((user) => {
-        if (user && user.userRole === 'admin' && user.status === 'verified') {
+        if (user.userRole === 'admin' && user.status === 'verified') {
           User.getUserByEmail(req.params.email).then((user) => {
             if (!user) {
-              return res.status(ST.NOT_FOUND).send({
+              res.status(ST.NOT_FOUND).send({
+                ID: req.user.id,
                 status: ST.NOT_FOUND,
                 error: MSG.MSG_NO_USER_EXIST,
 
               });
-            }
-            User.getAllUsers().then((users) => {
-              let i;
-              for (i = 0; i < users.length; i++) {
-                if (users[i].email === req.params.email) {
-                  users[i].status = req.body.status;
-                  res.status(ST.OK).send({
-                    status: ST.OK,
-                    Message: MSG.MSG_USER_VERIFIED,
-                    data: user,
+            } else {
+              User.getAllUsers().then((users) => {
+                let i;
+                for (i = 0; i < users.length; i++) {
+                  if (users[i].email === req.params.email) {
+                    users[i].status = req.body.status;
+                    res.status(ST.OK).send({
+                      status: ST.OK,
+                      Message: MSG.MSG_USER_VERIFIED,
+                      data: user,
 
-                  });
+                    });
+                  }
                 }
-              }
-            });
+              });
+            }
           });
         } else {
           res.status(ST.BAD_REQUEST).send({
@@ -157,6 +154,41 @@ class UserControler {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
     next();
+  }
+
+  async resetPassword(req, res, next) {
+    joi.validate(req.body, Validator.Validate.resetPassSchema).then(() => {
+      User.getUserById(req.user.id).then((user) => {
+        const oldPass = req.body.oldPassword;
+        const newPass = req.body.newPassword;
+        const confirmPass = req.body.confirmPassword;
+        if (newPass === confirmPass) {
+          if (oldPass === user.password) {
+            user.password = newPass;
+            res.status(ST.OK).send({
+              status: ST.OK,
+              Data: {
+                Message: 'Password reset successfully',
+                User: user,
+              },
+            });
+          } else {
+            res.status(ST.BAD_REQUEST).send({
+              status: ST.BAD_REQUEST,
+              error: 'Password mismatch!',
+            });
+          }
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            error: 'Password mismatch!',
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
   }
 }
 

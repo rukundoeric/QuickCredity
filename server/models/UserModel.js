@@ -1,6 +1,7 @@
 
 class User {
   constructor() {
+    this.type = { type: 'UserList' };
     this.userData = [
       {
         id: 'klsfks833399aa9o99272jua929njk2',
@@ -21,7 +22,7 @@ class User {
         address: 'Kimironko',
         createdOn: '4/28/2019',
         userRole: 'admin',
-        password: 'emmy123',
+        password: 'emmy12345',
         status: 'verified',
       },
       {
@@ -48,12 +49,6 @@ class User {
 
   async getUserByEmail(email) {
     return this.userData.find(user => user.email === email);
-  }
-
-  async getUserByName(userName) {
-    // eslint-disable-next-line no-shadow
-    const user = this.userData.find(user => user.userName === userName);
-    return !user ? null : user.userName;
   }
 
   async getUserById(id) {

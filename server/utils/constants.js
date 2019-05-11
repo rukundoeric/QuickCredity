@@ -1,43 +1,38 @@
-const apiUrlv1 = '/api/v1';
-const apiUrlv2 = '/api/v2';
+const apiV1RootUsers = '/api/v1/';
+const apiV1RootLoans = '/api/v1/loans/';
+const textEmail = 'benshidanny11@gmail.com';
 
-// All api for v1
-const apiUrlv1auth = `${apiUrlv1}/auth`;
-const apiUrlv1authLogin = `${apiUrlv1auth}/login`;
-const v1userSignup = `${apiUrlv1}/signup`;
-const apiUrlv1messages = `${apiUrlv1}/messages`;
-const apiUrlv1messagesUnread = `${apiUrlv1messages}/unread`;
-const apiUrlv1messagesSent = `${apiUrlv1messages}/sent`;
-const apiUrlv1messagesAction = `${apiUrlv1messages}/:id`;
-
-// All api for v2
-const apiUrlv2auth = `${apiUrlv2}/auth`;
-const apiUrlv2authLogin = `${apiUrlv2auth}/login`;
-const v1userSignup = `${apiUrlv2auth}/signup`;
-const apiUrlv2authVerification = `${apiUrlv2authSignup}/:email/:code`;
-// Acccount Verification
-const verification_link_development = 'http://localhost:7070/api/v2/auth/signup';
-const verification_link_production = 'https://epicmaileric.herokuapp.com/api/v2/auth/signup';
+// All urls for api v1 user
+const apiUrlv1authLogin = `${apiV1RootUsers}auth/login`;
+const apiV1userSignup = '/api/v1/auth/signup';
+const apiV1GetAllUsers = `${apiV1RootUsers}users`;
+const apiUrlv1verfyUser = `${apiV1RootUsers}${apiV1GetAllUsers}`;
+const apiV1ResetPassword = `${apiV1RootUsers}${apiV1GetAllUsers}/reset`;
+// All urls for api loan
+const apiUrlv1applyForLoan = `${apiV1RootLoans}apply`;
+const apiUrlv1getAllLoanApplications = `${apiV1RootLoans}loans`;
+const apiUrlv1viewRepaidLoans = `${apiV1RootLoans}repaid`;
+const apiUrlv1viewCurrentLoans = `${apiV1RootLoans}current`;
+const apiUrlv1approveOrReject = `${apiV1RootLoans}approveorreject/:id`;
+const apiUrlv1repayLoan = `${apiV1RootLoans}:id/repayment`;
+const apiUrlv1viewRepHistory = `${apiV1RootLoans}:id/repayments`;
+const apiUrlv1postRepayHistory = `${apiV1RootLoans}postrepayhistory`;
+const welcomApi='http://localhost:5060/';
 
 export {
   apiUrlv1authLogin,
-  v1userSignup,
-  apiUrlv1messages,
-  apiUrlv1messagesUnread,
-  apiUrlv1messagesSent,
-  apiUrlv1messagesAction,
-  apiUrlv2authVerification,
-  apiUrlv2authLogin,
-  apiUrlv2authSignup,
-  apiUrlv2messages,
-  apiUrlv2messagesUnread,
-  apiUrlv2messagesSent,
-  apiUrlv2messagesAction,
-  verification_link_development,
-  verification_link_production,
-  apiUrlv2createGroup,
-  apiUrlv2deleteGroup,
-  apiUrlv2AddUserToGroup,
-  apiUrlv2DeleteUserFromGroup,
-  apiUrlv2SendMessageToGroup,
+  apiV1userSignup,
+  apiV1GetAllUsers,
+  apiUrlv1verfyUser,
+  apiV1ResetPassword,
+  apiUrlv1applyForLoan,
+  apiUrlv1getAllLoanApplications,
+  apiUrlv1viewRepaidLoans,
+  apiUrlv1viewCurrentLoans,
+  apiUrlv1approveOrReject,
+  apiUrlv1repayLoan,
+  apiUrlv1viewRepHistory,
+  apiUrlv1postRepayHistory,
+  welcomApi,
+  textEmail,
 };

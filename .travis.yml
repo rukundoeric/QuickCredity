@@ -1,0 +1,23 @@
+sudo: false
+env:
+  global:
+    - PORT=7070
+    - NODE_ENV=development
+    - JWT_SECRET=ericrukundo005@gmail.com130852
+language: node_js
+node_js:
+  - "10.15.1"
+branches:
+  only:
+    - develop
+install:
+  - npm install
+  - npm install -g coveralls
+cache:
+  directories:
+    - node_modulesnp
+script:
+  - npm run test
+after_success:
+  - npm run coveralls
+
