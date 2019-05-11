@@ -105,16 +105,16 @@ class LoanControler {
     User.getUserById(req.user.id).then((user) => {
       if (user && user.userRole === 'admin' && user.status === 'verified') {
         Loan.getSpecLoan(req.params.id).then((loan) => {
-          if (!loan) {
-            res.status(ST.BAD_REQUEST).send({
-              status: ST.BAD_REQUEST,
-              error: 'No loan found with this id',
-            });
-          } else {
+          if (loan) {
             res.status(200).send({
               Status: 200,
               Message: 'Loan found',
               Data: loan,
+            });
+          } else {
+            res.status(ST.BAD_REQUEST).send({
+              status: ST.BAD_REQUEST,
+              error: 'No loan found with this id',
             });
           }
         });
@@ -169,7 +169,7 @@ class LoanControler {
           });
         }
       });
-    }).catch(error => res.send({
+    }).catch(error => res.status(400).send({
       status: 400,
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
@@ -237,6 +237,7 @@ class LoanControler {
               });
             } else {
               let i;
+              console.log(`Loan Id: ${req.params.id}`);
               const loanStatus = req.body.status;
               const transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -336,44 +337,38 @@ class LoanControler {
                 status: ST.BAD_REQUEST,
                 error: 'You dont have a loan in loan list',
               });
-            } else if (loan.userEmail === user.email) {
-              Loan.getSpecLoan(req.params.id).then((loan) => {
-                if (!loan) {
-                  res.status(ST.BAD_REQUEST).send({
-                    status: ST.BAD_REQUEST,
-                    error: 'No loan found for provided id',
-                  });
-                } else if (loan.status === 'approved' && loan.repaid === false) {
-                  const { paidAmount } = req.body;
-                  paidAm = paidAmount;
-                  balance = loan.amount - paidAm;
-                  const loanRepayment = {
-                    id: uuidv4(),
-                    loanId: loan.id,
-                    createdOn: new Date(),
-                    Amount: loan.amount,
-                    monthlyIntallment: loan.paymentInstallment,
-                    paidAmount: paidAm,
-                    Balance: balance,
-                  };
-                  res.status(ST.OK).send({
-                    status: ST.OK,
-                    MEssage: `You have successfully paid a loan with id: ${loan.id}`,
-                    Data: loanRepayment,
-                  });
-                } else {
-                  res.status(ST.BAD_REQUEST).send({
-                    status: ST.BAD_REQUEST,
-                    Error: 'May be your loan is not approved or is fully paid',
-                  });
-                }
-              });
-            } else {
-              res.status(ST.BAD_REQUEST).send({
-                status: ST.BAD_REQUEST,
-                Error: 'This loan belongs to other client!',
-              });
             }
+            Loan.getSpecLoan(req.params.id).then((loan) => {
+              if (!loan) {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  error: 'No loan found for provided id',
+                });
+              } else if (loan.status === 'approved' && loan.repaid === false) {
+                const { paidAmount } = req.body;
+                paidAm = paidAmount;
+                balance = loan.amount - paidAm;
+                const loanRepayment = {
+                  id: uuidv4(),
+                  loanId: loan.id,
+                  createdOn: new Date(),
+                  Amount: loan.amount,
+                  monthlyIntallment: loan.paymentInstallment,
+                  paidAmount: paidAm,
+                  Balance: balance,
+                };
+                res.status(ST.OK).send({
+                  status: ST.OK,
+                  MEssage: `You have successfully paid a loan with id: ${loan.id}`,
+                  Data: loanRepayment,
+                });
+              } else {
+                res.status(ST.BAD_REQUEST).send({
+                  status: ST.BAD_REQUEST,
+                  Error: 'May be your loan is not approved or is fully paid',
+                });
+              }
+            });
           });
         } else {
           res.status(ST.BAD_REQUEST).send({
@@ -472,17 +467,12 @@ class LoanControler {
                         Message: 'Repaymet posted successfully',
                         Data: loanRepay,
                       });
-                    } else {
-                      res.send({
-                        Status: ST.BAD_REQUEST,
-                        Error: 'Repayment not posted, try again later!',
-                      });
                     }
                   });
                 } else {
                   res.send({
                     Status: ST.BAD_REQUEST,
-                    Error: 'No client found!',
+                    Error: 'May be this loan is pending or is repaid!',
                   });
                 }
               });

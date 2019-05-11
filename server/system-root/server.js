@@ -7,7 +7,7 @@ import loanRouter from '../routers/LoanRouter';
 // const User=require('./../routers/UserRouter');
 
 const app = express();
-const PORT = process.env.PORT || 7070;
+const PORT = process.env.PORT || 6070;
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -20,6 +20,12 @@ app.use('/', UserMessage);
 app.use('/', User);
 app.use('/', loanRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is started on ${PORT}`);
-});
+const startServer = (port = '') => {
+  const server = app.listen(port || PORT, () => {
+    console.log(`\n Server is running on PORT  ${port || PORT}...`);
+  });
+  return server;
+};
+startServer();
+
+export default startServer;
