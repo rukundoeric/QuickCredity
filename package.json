@@ -5,6 +5,7 @@
   "main": "bin/dev",
   "scripts": {
     "test": " cross-env NODE_ENV=test nyc mocha server/tests/*.spec.js --require babel-polyfill --exit",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint src",
     "start": "nodemon bin/dev"
   },
@@ -26,6 +27,7 @@
     "babel-plugin-istanbul": "^5.1.4",
     "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
