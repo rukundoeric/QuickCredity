@@ -1,0 +1,11 @@
+version: "2"         # required to adjust maintainability checks
+checks:
+  similar-code:
+    config:
+      threshold: #overriding will affect all languages
+  identical-code:
+    config:
+      threshold: #overriding will affect all languages
+exclude_patterns:
+- "UI"
+- "node_modules"
