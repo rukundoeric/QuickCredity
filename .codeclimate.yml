@@ -10,3 +10,6 @@ exclude_patterns:
 - "UI"
 - "node_modules"
 - "server/tests"
+- "coverage"
+- ".vscode"
+- ".nyc_output"
