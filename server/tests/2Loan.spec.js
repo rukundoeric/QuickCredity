@@ -103,7 +103,7 @@ describe('Loan', () => {
     });
     it('Should return  length for loan list', () => {
       LoanModel.viewLoan().then((res) => {
-        expect(res.length).to.equal(4);
+        expect(res.length).to.equal(6);
       });
     });
     it('Should return specific loan for provided id', () => {
