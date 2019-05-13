@@ -11,7 +11,9 @@
     "test": " cross-env NODE_ENV=test nyc mocha server/tests/*.spec.js --require babel-polyfill --exit",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint src",
+
     "start": "node bin/dev", 
+
     "heroku-postbuild": "npm install --production"
   },
   "repository": {
@@ -47,12 +49,14 @@
     "nodemailer": "^6.1.1",
     "request": "^2.88.0",
     "uuid": "^3.3.2",
+
     "babel-polyfill": "^6.26.0",
     "@babel/core": "^7.4.4", 
     "@babel/cli": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "babel-plugin-istanbul": "^5.1.4",
     "@babel/register": "^7.4.4"
+
   },
   "keywords": [
     "node",
