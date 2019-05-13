@@ -61,7 +61,11 @@
     "@babel/plugin-transform-regenerator": "*",
     "@babel/plugin-transform-runtime": "*",
     "@babel/preset-env": "*",
-    "@babel/runtime": "*"
+    "@babel/runtime": "*",
+     "babel-watch": "^2.0.7",
+    "@babel/cli": "*",
+    "@babel/core": "*",
+    "@babel/node": "*"
   },
   "keywords": [
     "node",
