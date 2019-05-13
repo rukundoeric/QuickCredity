@@ -7,7 +7,8 @@
     "test": " cross-env NODE_ENV=test nyc mocha server/tests/*.spec.js --require babel-polyfill --exit",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint src",
-    "start": "nodemon bin/dev"
+    "start": "node bin/dev", 
+    "heroku-postbuild": "npm install --production"
   },
   "repository": {
     "type": "git",
@@ -20,12 +21,6 @@
   },
   "homepage": "https://github.com/benshidanny11/QuickCledit#readme",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/register": "^7.4.4",
-    "babel-plugin-istanbul": "^5.1.4",
-    "babel-polyfill": "^6.26.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.3",
     "cross-env": "^5.2.0",
@@ -47,7 +42,13 @@
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.1.1",
     "request": "^2.88.0",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "babel-polyfill": "^6.26.0",
+    "@babel/core": "^7.4.4", 
+    "@babel/cli": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-plugin-istanbul": "^5.1.4",
+    "@babel/register": "^7.4.4"
   },
   "nyc": {
     "require": [
