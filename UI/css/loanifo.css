@@ -302,6 +302,7 @@ table {
 
 table tr {
  border-bottom: 1px solid var(--rayal-white-borders);;
+
 }
 
 table tr:last-child {
@@ -355,11 +356,13 @@ table tr:last-child {
       fill-rule:nonzero;
   }
   .footer-icon.facebook{
+
     fill: white;
 }
 
 .footer-icon.instagram{
     fill: white;
+
 }
 .footer-icon.twitter
 {
@@ -367,7 +370,8 @@ table tr:last-child {
 }
 .footer-icon.google
 {
-    fill:white;
+    fill: white;
+
 }
 .footer-icon.tumbr{
    fill:  white;
