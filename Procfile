@@ -1,1 +1,1 @@
-web: node server/system-root/server.js
+web: node server/system-root/start.js
