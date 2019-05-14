@@ -11,10 +11,12 @@
     "test": " cross-env NODE_ENV=test nyc mocha server/tests/*.spec.js --require babel-polyfill --exit",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint src",
-
     "start": "node bin/dev", 
-
-    "heroku-postbuild": "npm install --production"
+    "heroku-postbuild": "npm install --production",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "start": "npm run build && node bin/dev",
+    "build": "npm run clean && npm run build-babel"
   },
   "repository": {
     "type": "git",
