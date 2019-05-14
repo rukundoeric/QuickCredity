@@ -2,19 +2,20 @@
   "name": "quickcredit",
   "version": "1.0.0",
   "description": "Quick Credit is an online lending platform that provides short term soft loans to individuals. This helps solve problems of financial inclusion as a way to alleviate poverty and empower low income earners",
-  "main": "bin/dev",
+  "main": "server/system-root/start.js",
   "engines": {
     "npm": "6.4.1",
     "node": "10.15.1"
   },
   "scripts": {
-    "test": " cross-env NODE_ENV=test nyc mocha server/tests/*.spec.js --require babel-polyfill --exit",
+    "test": "set NODE_ENV=test && nyc --reporter=html --reporter=text mocha --require babel-polyfill --require babel-register ./server/tests --timeout 30000 --exit",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint src",
-
-    "start": "node bin/dev", 
-
-    "heroku-postbuild": "npm install --production"
+    "start": "node server/system-root/start.js",
+    "heroku-postbuild": "npm install --production",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel"
   },
   "repository": {
     "type": "git",
@@ -49,36 +50,17 @@
     "nodemailer": "^6.1.1",
     "request": "^2.88.0",
     "uuid": "^3.3.2",
-
+    "babel-core": "^6.0.20",
     "babel-polyfill": "^6.26.0",
-    "@babel/core": "^7.4.4", 
-    "@babel/cli": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "babel-plugin-istanbul": "^5.1.4",
-    "@babel/register": "^7.4.4"
-
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "babel-register": "^6.26.0",
+    "babel-watch": "^2.0.7"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
-  ],
-  "nyc": {
-    "require": [
-      "@babel/register"
-    ],
-    "reporter": [
-      "lcov",
-      "text",
-      "html"
-    ],
-    "exclude": [
-      "**/node_modules/**",
-      "**/*.spec.js",
-      "**/coverage/**",
-      "**/UI/**"
-    ],
-    "sourceMap": false,
-    "instrument": false
-  }
+  ]
 }

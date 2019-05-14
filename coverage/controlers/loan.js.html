@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.73% </span>
+        <span class="strong">91.46% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>137/151</span>
+        <span class='fraction'>150/164</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">89.38% </span>
+        <span class="strong">89.57% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>101/113</span>
+        <span class='fraction'>103/115</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">95.65% </span>
+        <span class="strong">94.74% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>44/46</span>
+        <span class='fraction'>36/38</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">90.6% </span>
+        <span class="strong">91.36% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>135/149</span>
+        <span class='fraction'>148/162</span>
       </div>
     </div>
     <p class="quiet">
@@ -549,26 +549,26 @@
 <a name='L501'></a><a href='#L501'>501</a>
 <a name='L502'></a><a href='#L502'>502</a>
 <a name='L503'></a><a href='#L503'>503</a>
-<a name='L504'></a><a href='#L504'>504</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L504'></a><a href='#L504'>504</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">62x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -787,7 +787,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -947,7 +947,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">6x</span>
@@ -1106,7 +1106,7 @@ class LoanControler {
               };
               Loan.applyforLoan(loan).then((applied) =&gt; {
                 <span class="missing-if-branch" title="if path not taken" >I</span>if (!applied) {
-<span class="cstat-no" title="statement not covered" >                  res.status(ST.BAD_REQUEST).send({</span>
+<span class="cstat-no" title="statement not covered" >                  res.s</span>tatus(ST.BAD_REQUEST).send({
                     status: ST.BAD_REQUEST,
                     error: MSG.MSG_LOAN_NOT_APPLIED,
                   });
@@ -1190,7 +1190,7 @@ class LoanControler {
         if (user &amp;&amp; user.userRole === 'admin' &amp;&amp; user.status === 'verified') {
           Loan.viewLoan().then((loans) =&gt; {
             <span class="missing-if-branch" title="if path not taken" >I</span>if (!loans) {
-<span class="cstat-no" title="statement not covered" >              res.status(ST.BAD_REQUEST).send({</span>
+<span class="cstat-no" title="statement not covered" >              res.s</span>tatus(ST.BAD_REQUEST).send({
                 status: ST.BAD_REQUEST,
                 error: 'No loan found',
               });
@@ -1237,7 +1237,7 @@ class LoanControler {
         if (user &amp;&amp; user.userRole === 'admin' &amp;&amp; user.status === 'verified') {
           Loan.viewLoan().then((loans) =&gt; {
             <span class="missing-if-branch" title="if path not taken" >I</span>if (!loans) {
-<span class="cstat-no" title="statement not covered" >              res.status(ST.BAD_REQUEST).send({</span>
+<span class="cstat-no" title="statement not covered" >              res.s</span>tatus(ST.BAD_REQUEST).send({
                 status: ST.BAD_REQUEST,
                 error: 'No loan found',
               });
@@ -1285,7 +1285,7 @@ class LoanControler {
         if (user &amp;&amp; user.userRole === 'admin' &amp;&amp; user.status === 'verified') {
           Loan.viewLoan().then((loans) =&gt; {
             <span class="missing-if-branch" title="if path not taken" >I</span>if (!loans) {
-<span class="cstat-no" title="statement not covered" >              res.status(ST.BAD_REQUEST).send({</span>
+<span class="cstat-no" title="statement not covered" >              res.s</span>tatus(ST.BAD_REQUEST).send({
                 status: ST.BAD_REQUEST,
                 error: 'No loan found',
               });
@@ -1342,9 +1342,9 @@ class LoanControler {
 &nbsp;
                   transporter.sendMail(mailOptions, <span class="fstat-no" title="function not covered" >(e</span>rror, info) =&gt; {
 <span class="cstat-no" title="statement not covered" >                    if (error) {</span>
-<span class="cstat-no" title="statement not covered" >                      console.log(error);</span>
+<span class="cstat-no" title="statement not covered" >                      console.l</span>og(error);
                     } else {
-<span class="cstat-no" title="statement not covered" >                      console.log(`Email sent: ${info.response}`);</span>
+<span class="cstat-no" title="statement not covered" >                      console.l</span>og(`Email sent: ${info.response}`);
                     }
                   });
                 } else {
@@ -1354,11 +1354,11 @@ class LoanControler {
                     subject: 'Quick credit loan application rejection',
                     html: output,
                   };
-<span class="cstat-no" title="statement not covered" >                  transporter.sendMail(mailOptions, <span class="fstat-no" title="function not covered" >(e</span>rror, info) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                  transporter.s</span>endMail(mailOptions, <span class="fstat-no" title="function not covered" >(e</span>rror, info) =&gt; {
 <span class="cstat-no" title="statement not covered" >                    if (error) {</span>
-<span class="cstat-no" title="statement not covered" >                      console.log(error);</span>
+<span class="cstat-no" title="statement not covered" >                      console.l</span>og(error);
                     } else {
-<span class="cstat-no" title="statement not covered" >                      console.log(`Email sent: ${info.response}`);</span>
+<span class="cstat-no" title="statement not covered" >                      console.l</span>og(`Email sent: ${info.response}`);
                     }
                   });
                 }
@@ -1387,7 +1387,7 @@ class LoanControler {
         if (user &amp;&amp; user.userRole === 'client' &amp;&amp; user.status === 'verified') {
           Loan.getLoanByUserEmail(user.email).then((loan) =&gt; {
             <span class="missing-if-branch" title="if path not taken" >I</span>if (!loan) {
-<span class="cstat-no" title="statement not covered" >              res.status(ST.BAD_REQUEST).send({</span>
+<span class="cstat-no" title="statement not covered" >              res.s</span>tatus(ST.BAD_REQUEST).send({
                 status: ST.BAD_REQUEST,
                 error: 'You dont have a loan in loan list',
               });
@@ -1445,7 +1445,7 @@ class LoanControler {
       if (user &amp;&amp; user.userRole === 'client' &amp;&amp; user.status === 'verified') {
         Loan.viewRepaymentHistory().then((history) =&gt; {
           <span class="missing-if-branch" title="if path not taken" >I</span>if (!history) {
-<span class="cstat-no" title="statement not covered" >            res.status(ST.BAD_REQUEST).send({</span>
+<span class="cstat-no" title="statement not covered" >            res.s</span>tatus(ST.BAD_REQUEST).send({
               status: ST.BAD_REQUEST,
               error: 'No repayment history!',
             });
@@ -1561,7 +1561,7 @@ export default new LoanControler();
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun May 12 2019 22:38:54 GMT+0200 (Eastern European Standard Time)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue May 14 2019 21:50:39 GMT+0200 (Eastern European Standard Time)
 </div>
 </div>
 <script src="..\prettify.js"></script>
