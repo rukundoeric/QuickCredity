@@ -1,6 +1,6 @@
 
 
-# QuickCledit
+# QuickCredit
 
 [![Build Status](https://travis-ci.com/benshidanny11/QuickCledit.svg?branch=develop)](https://travis-ci.com/benshidanny11/QuickCledit)
 [![Coverage Status](https://coveralls.io/repos/github/benshidanny11/QuickCledit/badge.svg)](https://coveralls.io/github/benshidanny11/QuickCledit)
