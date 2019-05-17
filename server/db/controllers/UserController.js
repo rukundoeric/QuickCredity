@@ -84,5 +84,37 @@ class UserC {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
   }
+
+  async verify(req, res) {
+    const { email } = req.params;
+    joi.validate(req.body, Validator.Validate.verifySchema).then(() => {
+      QueryExecutor.queryParams(queryString.checkIfUserIsVerified, [email]).then((verifyRes) => {
+        if (verifyRes[0]) {
+          res.status(ST.BAD_REQUEST).send({
+            Status: ST.BAD_REQUEST,
+            Message: `The user with email ${email} is already verified`,
+            Data: verifyRes,
+          });
+        } else {
+          QueryExecutor.queryParams(queryString.verifyUser, [req.body.status, email]).then((result) => {
+            if (result[0]) {
+              res.send({
+                Status: 200,
+                Message: `The user with email ${email} is now verified successfully !`,
+              });
+            } else {
+              res.status(ST.BAD_REQUEST).send({
+                Status: ST.BAD_REQUEST,
+                Message: `User with email ${email} is not verified, may be this email is doesn't exist!`,
+              });
+            }
+          });
+        }
+      });
+    }).catch(error => res.status(400).send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
 }
 export default new UserC();
