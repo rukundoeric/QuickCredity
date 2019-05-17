@@ -116,5 +116,46 @@ class UserC {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
   }
+
+  async resetPassword(req, res) {
+    joi.validate(req.body, Validator.Validate.resetPassSchema).then(() => {
+      const { oldPassword } = req.body;
+      const { email } = req.params;
+      QueryExecutor.queryParams(queryString.getUserByPassword, [oldPassword]).then((userResult) => {
+        if (!userResult[0]) {
+          res.status(ST.BAD_REQUEST).send({
+            Status: ST.BAD_REQUEST,
+            Message: 'Provided password is incorrect!',
+          });
+        } else {
+          const { newPassword } = req.body;
+          const { confirmPassword } = req.body;
+          if (newPassword === confirmPassword) {
+            QueryExecutor.queryParams(queryString.resetPassword, [newPassword, email]).then((resetResult) => {
+              if (resetResult) {
+                res.send({
+                  Status: 200,
+                  Message: 'You\'ve successfully reset your password!',
+                });
+              } else {
+                res.status(ST.BAD_REQUEST).send({
+                  Status: ST.BAD_REQUEST,
+                  Message: 'Unknown error',
+                });
+              }
+            });
+          } else {
+            res.status(ST.BAD_REQUEST).send({
+              Status: ST.BAD_REQUEST,
+              Message: 'New password must match to the confirm passowrd!',
+            });
+          }
+        }
+      });
+    }).catch(error => res.status(400).send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
 }
 export default new UserC();

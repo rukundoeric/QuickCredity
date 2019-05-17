@@ -17,5 +17,5 @@ router.patch('/api/v1/users/verify/:email', auth.verifyToken, user.verfyUser);
 router.post('/api/v2/auth/signup', UserC.signUp);
 router.post('/api/v2/auth/login', UserC.login);
 router.post('/api/v2/users/verify/:email', UserC.verify);
-
+router.post('/api/v2/users/reset/:email', UserC.resetPassword);
 export default router;
