@@ -1,8 +1,7 @@
 
 
 # QuickCredit
-
-[![Build Status](https://travis-ci.com/benshidanny11/QuickCledit.svg?branch=develop)](https://travis-ci.com/benshidanny11/QuickCledit)
+[![Build Status](https://travis-ci.com/benshidanny11/QuickCredit.svg?branch=develop)](https://travis-ci.com/benshidanny11/QuickCredit)
 [![Coverage Status](https://coveralls.io/repos/github/benshidanny11/QuickCledit/badge.svg)](https://coveralls.io/github/benshidanny11/QuickCledit)
 <a href="https://codeclimate.com/github/benshidanny11/QuickCledit/maintainability"><img src="https://api.codeclimate.com/v1/badges/aa284931216aa2a8dcd0/maintainability" /></a>
 
