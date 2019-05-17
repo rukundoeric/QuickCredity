@@ -69,5 +69,20 @@ class UserC {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
   }
+
+  async login(req, res) {
+    joi.validate(req.body, Validator.Validate.loginSchema).then(() => {
+      QueryExecutor.queryParams(queryString.login, [req.body.email, req.body.password]).then((rows) => {
+        if (rows[0]) {
+          res.send({ Message: 'Logged in successfully' });
+        } else {
+          res.send({ Error: 'Incorrect email or password' });
+        }
+      });
+    }).catch(error => res.status(400).send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
 }
 export default new UserC();
