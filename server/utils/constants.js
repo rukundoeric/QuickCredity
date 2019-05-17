@@ -18,6 +18,12 @@ const apiUrlv1repayLoan = `${apiV1RootLoans}:id/repayment`;
 const apiUrlv1viewRepHistory = `${apiV1RootLoans}:id/repayments`;
 const apiUrlv1postRepayHistory = `${apiV1RootLoans}postrepayhistory`;
 const welcomApi='http://localhost:5060/';
+const USER_VERIFIED = 'verified';
+const USER_ROLE_ADMIN = true;
+const USER_ROLE_CLIENT = 'client';
+const LOAN_PENDING = 'pending';
+const LOAN_REJECTED = 'rejected';
+const LOAN_APPROVED = 'approved';
 
 export {
   apiUrlv1authLogin,
@@ -35,4 +41,10 @@ export {
   apiUrlv1postRepayHistory,
   welcomApi,
   textEmail,
+  USER_VERIFIED,
+  USER_ROLE_ADMIN,
+  USER_ROLE_CLIENT,
+  LOAN_PENDING,
+  LOAN_REJECTED,
+  LOAN_APPROVED,
 };
