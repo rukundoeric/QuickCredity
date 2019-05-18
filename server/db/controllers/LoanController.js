@@ -169,6 +169,37 @@ class LoanC {
           });
         }
       });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
+
+  async viewCurrentLoan(req, res) {
+    QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((userResult) => {
+      if (userResult.rows[0].isadmin === true && userResult.rows[0].status === 'verified') {
+        QueryExecutor.queryParams(queryString.vewCurrentLoan, []).then((loanResult) => {
+          if (loanResult.rows) {
+            res.status(ST.OK).send({
+              Status: ST.OK,
+              data: {
+                message: `${loanResult.rows.length} Current loan(s) found`,
+                loans: loanResult.rows,
+              },
+            });
+          } else {
+            res.status(ST.NOT_FOUND).send({
+              status: ST.NOT_FOUND,
+              error: 'No current loans found!',
+            });
+          }
+        });
+      } else {
+        res.status(ST.BAD_REQUEST).send({
+          status: ST.BAD_REQUEST,
+          error: 'You are not admin or not verified!',
+        });
+      }
     });
   }
 }
