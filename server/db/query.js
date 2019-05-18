@@ -61,7 +61,8 @@ const queryString = {
   viewLoansQuery: 'SELECT * FROM application',
   getLoanByUserEmailQuery: 'SELECT * from application WHERE user_email=$1',
   getMyLoanRepaymentHistory: 'SELECT * FROM repayment_history WHERE loan_id=$1 AND user_email=$2',
-  approveLoanQuery: 'UPDATE application SET status=$',
+  approveLoanQuery: 'UPDATE application SET status=$1',
   vewCurrentOrRepaidLoanQuery: 'SELECT * FROM application WHERE status=$1 AND repaid=$2',
+  getLoanById: 'SELECT * FROM application WHERE id=$1',
 };
 export default queryString;
