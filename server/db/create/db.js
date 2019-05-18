@@ -8,17 +8,17 @@ import pg from 'pg';
 import dotenv from 'dotenv';
 import con from '../connect/con_file';
 import queryString from '../query';
+import pool from '../connect/connection';
+// const config = {
+//   user: 'DannyAdmin',
+//   database: 'quick-credit',
+//   password: 'DannyPro123',
+//   port: 5432,
+// };
 
-const config = {
-  user: 'DannyAdmin',
-  database: 'quick-credit',
-  password: 'DannyPro123',
-  port: 5432,
-};
+// // dotenv.config();
 
-// dotenv.config();
-
-const pool = new pg.Pool(config);
+// const pool = new pg.Pool(config);
 class CreateTables {
   constructor() {
     pool.query(queryString.createUserTableQuery).then((res) => {

@@ -41,7 +41,7 @@ const queryString = {
     balance VARCHAR(30)
 )`,
   signup: 'INSERT INTO users(id,firstName,lastName,email,address,createdOn,status,isadmin,password) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)',
-  login: 'SELECT * FROM users WHERE email=$1 and password=$2',
+  login: 'SELECT * FROM users WHERE email=$1',
   getAllUser: 'SELECT * FROM users',
   getUserById: 'SELECT * FROM users WHERE id = $1',
   getUserByEmail: 'SELECT * FROM users WHERE email=$1 ',

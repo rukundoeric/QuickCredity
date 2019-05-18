@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import queryString from '../query';
 import ST from '../../utils/status';
-import db from '../create/db';
+import db from '../exec';
 
 class Auth {
   constructor() {
@@ -22,7 +22,9 @@ class Auth {
         });
       }
       const decoded = await jwt.verify(token, process.env.JWT_SECRET);
-      db.query(queryString.getUserById, [decoded.userid]).then((result) => {
+      db.queryParams(queryString.getUserById, [decoded.userid]).then((result) => {
+      //  console.log(decoded.userid);
+        // console.log(result.rows[0].id);
         if (!result.rows[0]) {
           return res.status(ST.BAD_REQUEST).send({
             status: ST.BAD_REQUEST,
@@ -33,15 +35,16 @@ class Auth {
         next();
       });
     } catch (error) {
+      console.log(error);
       return res.status(ST.BAD_REQUEST).send({
         status: ST.BAD_REQUEST,
-        error: { message: 'The token you provided is invalid' },
+        error: { message: error.message },
       });
     }
   }
 
   async generateToken(user) {
-    const payload = { user: user.firstName };
+    const payload = { userid: user.id };
     const options = { expiresIn: '20d' };
     const secret = process.env.JWT_SECRET;
     const token = jwt.sign(payload, secret, options);
