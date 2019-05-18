@@ -7,7 +7,6 @@ import nodemailer from 'nodemailer';
 import Validator from '../../utils/validation';
 import ST from '../../utils/status';
 import MSG from '../../utils/res_messages';
-import Auth from '../middleware/auth';
 import queryString from '../query';
 import QueryExecutor from '../exec';
 import CreateTables from '../create/db';
@@ -55,7 +54,7 @@ class LoanC {
                   paymentInstallment,
                   interest,
                 };
-                
+
                 const loanArray = [uuidv4(), req.body.userEmail, formatedDate, 'pending', false, tenor, amount, paymentInstallment, interest];
                 QueryExecutor.queryParams(queryString.apply, loanArray).then((result) => {
                   res.status(ST.OK).send({
@@ -85,6 +84,92 @@ class LoanC {
       status: 400,
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
+  }
+
+  async approveOrReject(req, res) {
+    joi.validate(req.body, Validator.Validate.approveOrRejectSchema).then(() => {
+      QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((userResult) => {
+        if (userResult.rows[0].isadmin === true && userResult.rows[0].status === 'verified') {
+          QueryExecutor.queryParams(queryString.getLoanById, [req.params.id]).then((loanResult) => {
+            if (loanResult.rows[0]) {
+              if (loanResult.rows[0].status === 'pending') {
+                const transporter = nodemailer.createTransport({
+                  service: 'gmail',
+                  secure: false,
+                  port: 25,
+                  auth: {
+                    user: process.env.QUICK_CREDIT_EMAIL,
+                    pass: process.env.QUICK_PASSWORD,
+                  },
+                  tls: { rejectUnauthorized: false },
+                });
+                const loanStatus = req.body.status;
+                let mailOptions = null;
+                QueryExecutor.queryParams(queryString.approveLoanQuery, [loanStatus]).then((apprResult) => {
+                  if (apprResult) {
+                    res.status(ST.OK).send({
+                      Status: ST.OK,
+                      message: `Loan is ${loanStatus} Successfully and this client will receive approval or rejection email`,
+                    });
+                  }
+                });
+                const output = `<html>
+                <body>
+                <h3 style={color:blue}>Hello Quick credit user</h3>
+                <p> We are informing you that your loan application is ${loanStatus}.</p>
+                </body>
+                </html>`;
+                if (loanStatus === 'approved') {
+                  mailOptions = {
+                    from: 'Quick credit',
+                    to: loanResult.rows[0].user_email,
+                    subject: 'Quick credit loan application approval',
+                    html: output,
+                  };
+
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log(`Email sent: ${info.response}`);
+                    }
+                  });
+                } else {
+                  mailOptions = {
+                    from: process.env.QUICK_CREDIT_EMAIL,
+                    to: loanResult.rows[0].user_email,
+                    subject: 'Quick credit loan application rejection',
+                    html: output,
+                  };
+                  transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log(`Email sent: ${info.response}`);
+                    }
+                  });
+                }
+              } else {
+                res.status(ST.NOT_FOUND).send({
+                  status: ST.NOT_FOUND,
+                  error: 'No pending loan found !',
+                });
+              }
+            } else {
+              res.status(ST.NOT_FOUND).send({
+                status: ST.NOT_FOUND,
+                error: `No loan found with id ${req.params.id} !`,
+              });
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            error: 'You are not admin or not verified!',
+          });
+        }
+      });
+    });
   }
 }
 export default new LoanC();
