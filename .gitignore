@@ -1,11 +1,7 @@
-
 secrets/
 node_modules/
 .vscode
-.gitignore
 package-lock.json
 .env
 coverage/
 .nyc_output/
-
-

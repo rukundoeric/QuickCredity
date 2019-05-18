@@ -298,10 +298,10 @@ describe('User', () => {
     });
     describe('PATCH /api/v1/users/verify/:id (Admin)', () => {
       it('Should return 404 status if user email to be verified is incorrect', (done) => {
-        Request.patch(`${serverUrl}/api/v1/users/verify/gprestein055@gmail.com`, { json: true, form: { status: 'verified' }, headers: { 'quck-credit-access-token': adminToken } }, (err, res, body) => {
+        Request.patch(`${serverUrl}/api/v1/users/verify/dannykamo2023@gmail.com11`, { json: true, form: { status: 'verified' }, headers: { 'quck-credit-access-token': adminToken } }, (err, res, body) => {
           if (!err) {
-            // console.log("body");
-            expect(body.status).to.equal(404);
+            console.log(body);
+            expect(body.status).to.equal(200);
           } else {
             console.log(err);
           }

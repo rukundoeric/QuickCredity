@@ -3,6 +3,7 @@
 import express from 'express';
 import LoanControler from '../controlers/loan';
 import auth from '../utils/auth';
+import LoanC from '../db/controllers/LoanController';
 
 const loanRouter = express.Router();
 // ROuters for models(V1)
@@ -15,4 +16,6 @@ loanRouter.patch('/api/v1/loans/approveorreject/:id', auth.verifyToken, LoanCont
 loanRouter.post('/api/v1/loans/:id/repayment', auth.verifyToken, LoanControler.repayLoan);
 loanRouter.get('/api/v1/loans/:id/repayments', auth.verifyToken, LoanControler.viewRepHistory);
 loanRouter.post('/api/v1/loans/postrepayhistory', auth.verifyToken, LoanControler.postRepayHistory);
+// Routers for database apis(V2)
+loanRouter.post('/api/v2/loans/apply', auth.verifyToken, LoanC.applyForLoan);
 export default loanRouter;

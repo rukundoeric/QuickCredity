@@ -50,9 +50,11 @@ const queryString = {
   resetPassword: 'UPDATE users SET password=$1 WHERE email=$2',
   getUserByPassword: 'SELECT * FROM users where password=$1',
   getAdminUser: `SELECT * FROM users where isadmin=${USER_ROLE_ADMIN}`,
-  appy: `INSERT INTO application
+  getClientUser: `SELECT * FROM users where isadmin=${USER_ROLE_CLIENT}`,
+  getClientUserByEmail: `SELECT * FROM users where isadmin=${USER_ROLE_CLIENT} AND email=$1`,
+  apply: `INSERT INTO application
   (id,user_email,createdOn,status,repaid,tenor,amount,payment_installment,interest)
-   VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+   VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
   postLoanRepaymentHistoryQuery: 'INSERT INTO repayment_history(id,loan_id,user_email,created_on,paymentInstallment,amount,balance) VALUES($1,$2,$3,$4,$5,$6,$7)',
   repayLoanQuery: 'INSERT INTO repayment(id,loan_id,user_email,created_on,amount) VALUES($1,$2,$3,$4,$5)',
   viewSpecLoanQuery: 'SELECT * FROM application WHERE id=$1',
