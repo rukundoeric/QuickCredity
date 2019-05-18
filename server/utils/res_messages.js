@@ -19,4 +19,5 @@ export default {
   MSG_LOAN_APPLIED_SUCCESSFULLY: 'You have applied for loan successfully, checkout your email we will inform you if it is approved or rejected',
   MSG_LOAN_NOT_APPLIED: 'Invalid loan application',
   MSG_NOT_CLIENT: 'You are not a client to this system or unverified, please first create account or contact the admin to help you ',
+  MSG_NOT_CLIENT_VERIFIED: 'You are not a verified ',
 };
