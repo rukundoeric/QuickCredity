@@ -24,6 +24,8 @@ const USER_ROLE_CLIENT = false;
 const LOAN_PENDING = 'pending';
 const LOAN_REJECTED = 'rejected';
 const LOAN_APPROVED = 'approved';
+const LOAN_REPAID=true;
+const LOAN_NOT_REPAID=false;
 
 export {
   apiUrlv1authLogin,
@@ -47,4 +49,6 @@ export {
   LOAN_PENDING,
   LOAN_REJECTED,
   LOAN_APPROVED,
+  LOAN_REPAID,
+  LOAN_NOT_REPAID,
 };

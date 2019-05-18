@@ -20,4 +20,5 @@ loanRouter.post('/api/v1/loans/postrepayhistory', auth.verifyToken, LoanControle
 // Routers for database apis(V2)
 loanRouter.post('/api/v2/loans/apply', Auth.verifyToken, LoanC.applyForLoan);
 loanRouter.patch('/api/v2/loans/approveorreject/:id', Auth.verifyToken, LoanC.approveOrReject);
+loanRouter.get('/api/v2/loans/current', Auth.verifyToken, LoanC.viewCurrentLoan);
 export default loanRouter;

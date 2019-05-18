@@ -1,4 +1,6 @@
-import { USER_VERIFIED, USER_ROLE_ADMIN , USER_ROLE_CLIENT , LOAN_PENDING, LOAN_REJECTED, LOAN_APPROVED } from '../utils/constants';
+import {
+  USER_VERIFIED, USER_ROLE_ADMIN, USER_ROLE_CLIENT, LOAN_PENDING, LOAN_REJECTED, LOAN_APPROVED, LOAN_REPAID, LOAN_NOT_REPAID,
+} from '../utils/constants';
 
 const queryString = {
   // Tables creations
@@ -62,7 +64,7 @@ const queryString = {
   getLoanByUserEmailQuery: 'SELECT * from application WHERE user_email=$1',
   getMyLoanRepaymentHistory: 'SELECT * FROM repayment_history WHERE loan_id=$1 AND user_email=$2',
   approveLoanQuery: 'UPDATE application SET status=$1',
-  vewCurrentOrRepaidLoanQuery: 'SELECT * FROM application WHERE status=$1 AND repaid=$2',
+  vewCurrentLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID}`,
   getLoanById: 'SELECT * FROM application WHERE id=$1',
 };
 export default queryString;
