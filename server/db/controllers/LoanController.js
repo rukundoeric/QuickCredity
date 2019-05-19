@@ -318,6 +318,7 @@ class LoanC {
       status: 400,
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
-  }
+  
+
 }
 export default new LoanC();
