@@ -52,6 +52,7 @@
     "dotenv": "^7.0.0",
     "eslint-plugin-import": "^2.16.0",
     "express": "^4.16.4",
+    "heroku-pg-extras": "^1.2.1",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.1.1",

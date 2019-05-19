@@ -1,9 +1,4 @@
 sudo: false
-env:
-  global:
-    - PORT=7070
-    - NODE_ENV=development
-    - JWT_SECRET=DannyPro
 language: node_js
 node_js:
   - "10.15.1"
@@ -13,11 +8,19 @@ branches:
 install:
   - npm install
   - npm install -g coveralls
+  - npm install -g psql
 cache:
   directories:
-    - node_modulesnp
+    - "node_modules"
 script:
   - npm run test
 after_success:
   - npm run coveralls
 
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"
+  
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres

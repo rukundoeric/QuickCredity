@@ -17,12 +17,12 @@ class ConnectionConfig {
     this.environment = process.env.NODE_ENV || 'development';
     this.development = {
       host: '127.0.0.1',
-      user: 'DannyAdmin',
-      password: 'DannyPro123',
-      database: 'quick-credit',
+      user: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSOWRD,
+      database: process.env.DATABASE_NAME,
     };
     this.test = {
-      connectionString: process.env.TEST_DATABASE_URL,
+      connectionString: process.env.TEST_DB_URL,
     };
     this.production = {
       connectionString: process.env.DATABASE_URL,
