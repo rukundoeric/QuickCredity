@@ -59,12 +59,15 @@ const queryString = {
    VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
   postLoanRepaymentHistoryQuery: 'INSERT INTO repayment_history(id,loan_id,user_email,created_on,paymentInstallment,amount,balance) VALUES($1,$2,$3,$4,$5,$6,$7)',
   repayLoanQuery: 'INSERT INTO repayment(id,loan_id,user_email,created_on,amount) VALUES($1,$2,$3,$4,$5)',
+  updateLoan: 'UPDATE application SET amount=$1,repaid=$2 WHERE id=$3',
   viewSpecLoanQuery: 'SELECT * FROM application WHERE id=$1',
   viewLoansQuery: 'SELECT * FROM application',
   getLoanByUserEmailQuery: 'SELECT * from application WHERE user_email=$1',
   getMyLoanRepaymentHistory: 'SELECT * FROM repayment_history WHERE loan_id=$1 AND user_email=$2',
   approveLoanQuery: 'UPDATE application SET status=$1',
-  vewCurrentLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID}`,
+  viewCurrentLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID}`,
+  vewRepaidLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_REPAID}`,
   getLoanById: 'SELECT * FROM application WHERE id=$1',
+  viewCurrentLoanByEmail: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID} OR user_email=$1`,
 };
 export default queryString;

@@ -83,7 +83,7 @@ class UserControler {
       // eslint-disable-next-line consistent-return
       User.getUserByEmail(req.body.email).then((user) => {
         if (!user) {
-          return res.status(ST.NOT_FOUND).send({
+          res.status(ST.NOT_FOUND).send({
             status: ST.NOT_FOUND,
             error: MSG.MSG_NO_USER_EXIST,
 
