@@ -43,6 +43,10 @@ class Validator {
         userEmail: joi.string().regex(/^[a-zA-Z]/).min(5).required(),
         paidAmount: joi.number().required(),
       }),
+      postRepaymentScemaV2: joi.object().keys({
+        userEmail: joi.string().regex(/^[a-zA-Z]/).min(5).required(),
+        paidAmount: joi.number().required(),
+      }),
       resetPassSchema: joi.object().keys({
         oldPassword: joi.string().regex(/^[a-zA-Z]/).required(),
         newPassword: joi.string().regex(/^[a-zA-Z]/).min(8).required(),

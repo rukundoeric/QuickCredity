@@ -23,4 +23,5 @@ loanRouter.patch('/api/v2/loans/approveorreject/:id', Auth.verifyToken, LoanC.ap
 loanRouter.get('/api/v2/loans/current', Auth.verifyToken, LoanC.viewCurrentLoan);
 loanRouter.get('/api/v2/loans/repaid', Auth.verifyToken, LoanC.viewRepaidLoan);
 loanRouter.post('/api/v2/loans/repay', Auth.verifyToken, LoanC.repayLoan);
+loanRouter.post('/api/v2/loans/postrepay', Auth.verifyToken, LoanC.postRepay);
 export default loanRouter;
