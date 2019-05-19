@@ -63,7 +63,7 @@ const queryString = {
   viewSpecLoanQuery: 'SELECT * FROM application WHERE id=$1',
   viewLoansQuery: 'SELECT * FROM application',
   getLoanByUserEmailQuery: 'SELECT * from application WHERE user_email=$1',
-  getMyLoanRepaymentHistory: 'SELECT * FROM repayment_history WHERE loan_id=$1 AND user_email=$2',
+  getMyLoanRepaymentHistory: 'SELECT * FROM repayment_history WHERE  user_email=$1',
   approveLoanQuery: 'UPDATE application SET status=$1',
   viewCurrentLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID}`,
   vewRepaidLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_REPAID}`,
