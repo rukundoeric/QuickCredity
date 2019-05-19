@@ -77,7 +77,7 @@ class UserC {
       QueryExecutor.queryParams(queryString.login, [req.body.email]).then((result) => {
         if (result.rows[0]) {
           if (result.rows[0].password === req.body.password) {
-            auth.generateToken(result.rows[0]).then((token) => {
+            Auth.generateToken(result.rows[0]).then((token) => {
               res.status(ST.OK).send(
                 {
                   status: ST.OK,

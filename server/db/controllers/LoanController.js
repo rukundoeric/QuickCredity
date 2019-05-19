@@ -11,7 +11,7 @@ import queryString from '../query';
 import QueryExecutor from '../exec';
 import CreateTables from '../create/db';
 
-const paidAm = 0;
+let paidAm = 0;
 let balance = 0;
 // For formating gate.
 const today = new Date();
@@ -230,5 +230,95 @@ class LoanC {
       }
     });
   }
+
+  async viewRepaidLoan(req, res) {
+    QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((userResult) => {
+      if (userResult.rows[0].isadmin === true && userResult.rows[0].status === 'verified') {
+        QueryExecutor.queryParams(queryString.vewRepaidLoan, []).then((loanResult) => {
+          if (loanResult.rows[0]) {
+            res.status(ST.OK).send({
+              Status: ST.OK,
+              data: {
+                message: `${loanResult.rows.length} repaid loan(s) found`,
+                loans: loanResult.rows,
+              },
+            });
+          } else {
+            res.status(ST.NOT_FOUND).send({
+              status: ST.NOT_FOUND,
+              error: 'No repaid loans found!',
+            });
+          }
+        });
+      } else {
+        res.status(ST.BAD_REQUEST).send({
+          status: ST.BAD_REQUEST,
+          error: 'You are not admin or not verified!',
+        });
+      }
+    });
+  }
+
+  async repayLoan(req, res) {
+    joi.validate(req.body, Validator.Validate.repayLoanSchemaV2).then(() => {
+      QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((result) => {
+        if (result.rows[0].isadmin === false) {
+          QueryExecutor.queryParams(queryString.getLoanByUserEmailQuery, [req.body.userEmail]).then((loanResult) => {
+            if (!loanResult.rows[0]) {
+              res.status(ST.BAD_REQUEST).send({
+                status: ST.BAD_REQUEST,
+                error: `No laon found for user ${req.body.userEmail}`,
+              });
+            } else {
+              QueryExecutor.queryParams(queryString.viewCurrentLoanByEmail, [req.body.userEmail]).then((currentLoanResult) => {
+                if (currentLoanResult.rows[0]) {
+                  const { paidAmount } = req.body;
+                  let repaid = false;
+                  if (loanResult.rows[0].amount < 1) {
+                    repaid = true;
+                  }
+                  paidAm = paidAmount;
+                  balance = loanResult.rows[0].amount - paidAm;
+                  const loanRepayment = [uuidv4(), currentLoanResult.rows[0].id, req.body.userEmail, formatedDate, paidAm];
+                  QueryExecutor.queryParams(queryString.repayLoanQuery, loanRepayment).then((repayResult) => {
+                    if (repayResult.rows) {
+                      QueryExecutor.queryParams(queryString.updateLoan, [balance, repaid, currentLoanResult.rows[0].id]).then((updateResult) => {
+                        if (updateResult.rows) {
+                          res.status(ST.OK).send({
+                            status: ST.OK,
+                            message: `Loan repayment is successfully done, previous amount was ${loanResult.rows[0].amount} now you remain with ${balance} of loan`,
+                          });
+                        }
+                      });
+                    } else {
+                      res.status(ST.BAD_REQUEST).send({
+                        status: ST.BAD_REQUEST,
+                        error: 'Unknown error',
+                      });
+                    }
+                  });
+                } else {
+                  res.status(ST.NOT_FOUND).send({
+                    status: ST.NOT_FOUND,
+                    error: 'Loan current not found, maybe this loan is repaid!',
+                  });
+                }
+              });
+            }
+          });
+        } else {
+          res.status(ST.NOT_FOUND).send({
+            status: ST.NOT_FOUND,
+            message: MSG.MSG_ACCESS_DENIED,
+            error: 'Only client are allowed to repay loans',
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  
+
 }
 export default new LoanC();
