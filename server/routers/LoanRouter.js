@@ -21,4 +21,5 @@ loanRouter.post('/api/v1/loans/postrepayhistory', auth.verifyToken, LoanControle
 loanRouter.post('/api/v2/loans/apply', Auth.verifyToken, LoanC.applyForLoan);
 loanRouter.patch('/api/v2/loans/approveorreject/:id', Auth.verifyToken, LoanC.approveOrReject);
 loanRouter.get('/api/v2/loans/current', Auth.verifyToken, LoanC.viewCurrentLoan);
+loanRouter.get('/api/v2/loans/spec/:id', Auth.verifyToken, LoanC.viewSpec);
 export default loanRouter;
