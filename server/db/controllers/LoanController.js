@@ -359,5 +359,33 @@ class LoanC {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
   }
+
+  async viewRepayHistory(req, res) {
+    QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((userResult) => {
+      if (userResult.rows[0].isadmin === false) {
+        QueryExecutor.queryParams(queryString.getMyLoanRepaymentHistory, [userResult.rows[0].email]).then((loanResult) => {
+          if (loanResult.rows[0]) {
+            res.status(ST.OK).send({
+              status: ST.OK,
+              data: {
+                message: `${loanResult.rows.length} record(s) found`,
+                loans: loanResult.rows,
+              },
+            });
+          } else {
+            res.status(ST.BAD_REQUEST).send({
+              status: ST.BAD_REQUEST,
+              error: 'No loan found',
+            });
+          }
+        });
+      } else {
+        res.status(ST.BAD_REQUEST).send({
+          status: ST.BAD_REQUEST,
+          error: MSG.MSG_NOT_CLIENT,
+        });
+      }
+    });
+  }
 }
 export default new LoanC();
