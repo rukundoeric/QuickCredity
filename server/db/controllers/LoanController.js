@@ -202,5 +202,33 @@ class LoanC {
       }
     });
   }
+
+  async viewSpec(req, res) {
+    QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((userResult) => {
+      if (userResult.rows[0].isadmin === true && userResult.rows[0].status === 'verified') {
+        QueryExecutor.queryParams(queryString.getLoanById, [req.params.id]).then((loanResult) => {
+          if (loanResult.rows[0]) {
+            res.status(ST.OK).send({
+              Status: ST.OK,
+              data: {
+                message: 'Loan found',
+                loans: loanResult.rows[0],
+              },
+            });
+          } else {
+            res.status(ST.NOT_FOUND).send({
+              status: ST.NOT_FOUND,
+              error: `No loan foud  found with id ${req.params.id}!`,
+            });
+          }
+        });
+      } else {
+        res.status(ST.BAD_REQUEST).send({
+          status: ST.BAD_REQUEST,
+          error: 'You are not admin or not verified!',
+        });
+      }
+    });
+  }
 }
 export default new LoanC();
