@@ -68,6 +68,6 @@ const queryString = {
   viewCurrentLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID}`,
   vewRepaidLoan: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_REPAID}`,
   getLoanById: 'SELECT * FROM application WHERE id=$1',
-  viewCurrentLoanByEmail: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID} OR user_email=$1`,
+  viewCurrentLoanByEmail: `SELECT * FROM application WHERE status='${LOAN_APPROVED}' AND repaid=${LOAN_NOT_REPAID} AND user_email=$1`,
 };
 export default queryString;

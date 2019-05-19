@@ -25,5 +25,6 @@ loanRouter.get('/api/v2/loans/spec/:id', Auth.verifyToken, LoanC.viewSpec);
 
 loanRouter.get('/api/v2/loans/repaid', Auth.verifyToken, LoanC.viewRepaidLoan);
 loanRouter.post('/api/v2/loans/repay', Auth.verifyToken, LoanC.repayLoan);
+loanRouter.post('/api/v2/loans/postrepay', Auth.verifyToken, LoanC.postRepay);
 
 export default loanRouter;

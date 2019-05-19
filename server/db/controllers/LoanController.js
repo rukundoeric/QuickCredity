@@ -318,7 +318,47 @@ class LoanC {
       status: 400,
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
-  
+  }
+
+  async postRepay(req, res) {
+    joi.validate(req.body, Validator.Validate.postRepaymentScemaV2).then(() => {
+      QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((userResult) => {
+        if (userResult.rows[0].isadmin === true && userResult.rows[0].status === 'verified') {
+          QueryExecutor.queryParams(queryString.viewCurrentLoanByEmail, [req.body.userEmail]).then((clientLoanResult) => {
+            if (clientLoanResult.rows[0]) {
+              const loanRepay = [uuidv4(), clientLoanResult.rows[0].id, req.body.userEmail, formatedDate, clientLoanResult.rows[0].payment_installment, req.body.paidAmount, clientLoanResult.rows[0].amount];
+              QueryExecutor.queryParams(queryString.postLoanRepaymentHistoryQuery, loanRepay).then((postResult) => {
+                if (postResult) {
+                  res.status(ST.OK).send({
+                    status: ST.OK,
+                    message: 'You\'ve successfully posted loan repayment to client',
+                  });
+                } else {
+                  res.status(ST.BAD_REQUEST).send({
+                    status: ST.BAD_REQUEST,
+                    message: 'Loan not posted successfully',
+                  });
+                }
+              });
+            } else {
+              res.status(ST.NOT_FOUND).send({
+                status: ST.NOT_FOUND,
+                message: `No current loan found for user ${req.body.userEmail}`,
+              });
+            }
+          });
+        } else {
+          res.status(ST.BAD_REQUEST).send({
+            status: ST.BAD_REQUEST,
+            message: MSG.MSG_UNAUTHORIZED_ADMIN_ERROR,
+          });
+        }
+      });
+    }).catch(error => res.send({
+      status: 400,
+      error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
+    }));
+  }
 
 }
 export default new LoanC();
