@@ -359,7 +359,6 @@ class LoanC {
       error: { message: error.message.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '') },
     }));
   }
-
   async viewRepayHistory(req, res) {
     QueryExecutor.queryParams(queryString.getUserById, [req.user.id]).then((userResult) => {
       if (userResult.rows[0].isadmin === false) {
@@ -387,5 +386,6 @@ class LoanC {
       }
     });
   }
+
 }
 export default new LoanC();
